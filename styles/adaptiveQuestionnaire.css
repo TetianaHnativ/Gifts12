@@ -1,0 +1,20 @@
+@media (max-width: 500px) {
+    .questionnaire {
+      gap: 15px;
+      padding: 10px;
+    }
+  
+    .questionnaire-main-title {
+      font-size: 18px;
+    }
+
+    .questionnaire-secondary-title {
+        font-size: 15px;
+      }
+  
+    .questionnaire-button {
+      font-size: 15px;
+    }
+  
+  }
+  
