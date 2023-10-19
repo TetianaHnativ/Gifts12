@@ -61,7 +61,7 @@ main {
 .services-list {
   display: flex;
   gap: 1%;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
   margin-bottom: 50px;
 }
 
@@ -80,8 +80,8 @@ main {
   margin-bottom: 10px;
   padding-top: 10px;
   color: #ffbc03;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
+  text-shadow: -1px -1px 0 #053053, 1px -1px 0 #053053, -1px 1px 0 #053053,
+    1px 1px 0 #053053;
 }
 
 .services-paragraph {

@@ -15,13 +15,17 @@
 }
 
 @media (max-width: 500px) {
+  .gifts-list-item {
+    max-width: 200px;
+  }
+
   .gift-img {
     width: 200px;
     height: 200px;
   }
+
   .gift-name {
     font-size: 16px;
-    max-width: 200px;
   }
 
   .gift-category {
@@ -47,9 +51,9 @@
     align-items: center;
   }
 
-  search {
+  .search {
     font-size: 12px;
-    min-width: 150px;
+    min-width: 180px;
   }
   .search-button {
     font-size: 12px;

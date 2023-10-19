@@ -11,6 +11,7 @@ main {
   border-radius: 4px;
   padding: 5px 15px;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .shop-button:hover,
@@ -59,12 +60,13 @@ main {
   border-color: #ffbc03;
   cursor: pointer;
   letter-spacing: 1px;
+  border-radius: 5px;
 }
 
 .search-button:focus,
 .search-button:hover {
   background-color: #038cff;
-  color:#fff;
+  color: #fff;
   border-color: #038cff;
 }
 
@@ -93,6 +95,8 @@ main {
   flex-direction: column;
   gap: 5px;
   padding-bottom: 5px;
+  max-width: 300px;
+  border-radius: 10px;
 }
 
 .gift-img {
@@ -104,9 +108,8 @@ main {
   text-align: center;
   color: #ffbc03;
   font-size: 18px;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
-  max-width: 300px;
+  text-shadow: -1px -1px 0 #053053, 1px -1px 0 #053053, -1px 1px 0 #053053,
+    1px 1px 0 #053053;
 }
 
 .gift-category {
