@@ -18,11 +18,8 @@
     />
 
     <link rel="stylesheet" href="./styles/reset.css" />
-    <link rel="stylesheet" href="./styles/header.css" />
-    <link rel="stylesheet" href="./styles/main.css" />
-    <link rel="stylesheet" href="./styles/footer.css" />
-    <link rel="stylesheet" href="./styles/adaptiveHeaderFooter.css" />
-    <link rel="stylesheet" href="./styles/adaptiveMain.css" />
+    <link rel="stylesheet" href="./styles/myAccountHeader.css" />
+    <link rel="stylesheet" href="./styles/adaptiveMyAccount.css" />
 
     <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
     <title>Gifts</title>
@@ -30,85 +27,41 @@
   <body>
     <div class="wrapper">
       <header>
-        <a class="logo" href="index.html"
-          ><img
-            class="logo-icon"
-            src="./imgs/logo-icon.jpg"
-            alt="logo-icon, gift"
-          />
-          Favorite<span class="logo-title-part2">Gift</span></a
-        >
-
+        <i class="fas fa-user-circle"></i>
+        <h1 class="name">Tetiana</h1>
         <nav>
-          <ul class="header-links-list">
-            <li class="header-links-item">
-              <a class="main-link" href="index.html">Головна</a>
+          <ul class="profile-list">
+            <li class="profile-item color-1">
+              <a href="#data" class="profile-item-link">
+                <i class="fas fa-database"></i> Мої дані
+                <i class="fas fa-database"></i
+              ></a>
             </li>
-            <li class="header-links-item">
-              <a class="shop-link" href="shop.html">Магазин подарунків</a>
+            <li class="profile-item color-2">
+              <a href="#orders" class="profile-item-link">
+                <i class="fa fa-shopping-basket"></i> Мої замовлення
+                <i class="fa fa-shopping-basket"></i
+              ></a>
             </li>
-            <li class="header-links-item">
-              <a class="idea-link" href="index.html">Ідеї для подарунків</a>
+            <li class="profile-item color-1">
+              <a href="#wishes" class="profile-item-link">
+                <i class="fas fa-heart"></i> Список обраних
+                <i class="fas fa-heart"></i
+              ></a>
+            </li>
+            <li class="profile-item color-2">
+              <a href="#ideas" class="profile-item-link">
+                <i class="fa fa-lightbulb"></i> Мої ідеї
+                <i class="fa fa-lightbulb"></i
+              ></a>
             </li>
           </ul>
         </nav>
-
-        <a href="authorization.html" class="login-link">Login</a>
+        <div id="menu" class="fa fa-bars"></div>
       </header>
-      <main>
-        
-      </main>
-      <footer>
-        <div class="address">
-          <h3>Наша адреса</h3>
-          <address>
-            <a
-              href="https://www.google.com/maps/place/%D0%BF%D1%80%D0%BE%D1%81%D0%BF.+%D0%92%D0%BE%D1%81%D1%81%D0%BE%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F,+%D0%A2%D0%B5%D1%80%D0%BD%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C,+%D0%A2%D0%B5%D1%80%D0%BD%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+46003/@49.5590485,25.6246539,18z/data=!4m6!3m5!1s0x4730315869eb8a63:0x5ee6201ca34d0634!8m2!3d49.5590468!4d25.6259414!16s%2Fg%2F11b6gj_fjr?entry=ttu"
-              >проспект Злуки, Тернопіль</a
-            >
-          </address>
-        </div>
-
-        <div class="contacts">
-          <h3>Контакти</h3>
-          <ul class="contacts-list">
-            <li class="contacts-list-item">
-              <a href="mailto:favoriteGift@gmail.com"
-                ><i class="fas fa-envelope"></i> favoriteGift@gmail.com</a
-              >
-            </li>
-            <li class="contacts-list-item">
-              <a href="tel:+38 099 62 78 735">
-                <i class="fas fa-phone"></i> +38 099 62 78 735</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div class="social-networks">
-          <h3>Соцмережі</h3>
-          <ul class="social-networks-list">
-            <li class="social-networks-item">
-              <a href="https://telegram.org"><i class="fab fa-telegram"></i></a>
-            </li>
-            <li class="social-networks-item">
-              <a href="https://www.instagram.com"
-                ><i class="fab fa-instagram"></i
-              ></a>
-            </li>
-            <li class="social-networks-item">
-              <a href="https://www.youtube.com"
-                ><i class="fab fa-youtube"></i
-              ></a>
-            </li>
-            <li class="social-networks-item">
-              <a href="https://www.facebook.com"
-                ><i class="fab fa-facebook"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </footer>
+      <main></main>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>
