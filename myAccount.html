@@ -1,67 +1,57 @@
 <!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,700&family=Raleway:wght@700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,700&family=Raleway:wght@700&display=swap"
+    rel="stylesheet" />
 
-    <link rel="stylesheet" href="./styles/reset.css" />
-    <link rel="stylesheet" href="./styles/myAccountHeader.css" />
-    <link rel="stylesheet" href="./styles/adaptiveMyAccount.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
-    <title>Gifts</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <i class="fas fa-user-circle"></i>
-        <h1 class="name">Tetiana</h1>
-        <nav>
-          <ul class="profile-list">
-            <li class="profile-item color-1">
-              <a href="#data" class="profile-item-link">
-                <i class="fas fa-database"></i> Мої дані
-                <i class="fas fa-database"></i
-              ></a>
-            </li>
-            <li class="profile-item color-2">
-              <a href="#orders" class="profile-item-link">
-                <i class="fa fa-shopping-basket"></i> Мої замовлення
-                <i class="fa fa-shopping-basket"></i
-              ></a>
-            </li>
-            <li class="profile-item color-1">
-              <a href="#wishes" class="profile-item-link">
-                <i class="fas fa-heart"></i> Список обраних
-                <i class="fas fa-heart"></i
-              ></a>
-            </li>
-            <li class="profile-item color-2">
-              <a href="#ideas" class="profile-item-link">
-                <i class="fa fa-lightbulb"></i> Мої ідеї
-                <i class="fa fa-lightbulb"></i
-              ></a>
-            </li>
-          </ul>
-        </nav>
-        <div id="menu" class="fa fa-bars"></div>
-      </header>
-      <main></main>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./scripts/script.js"></script>
-  </body>
+  <link rel="stylesheet" href="./styles/reset.css" />
+  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="./styles/footer.css" />
+  <link rel="stylesheet" href="./styles/adaptiveHeaderFooter.css" />
+  <link rel="stylesheet" href="./styles/myAccount.css" />
+
+  <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
+  <title>Gifts</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="user">
+        <i class='fas fa-user-circle'></i>
+        <h3 class="user-title">Tetiana Hnativ</h3>
+      </div>
+      <nav class="bacis-navigation">
+        <ul class="nav-list">
+          <li class="nav-links-item"><a class="nav-links" href="index.html"><i class="fa fa-home"></i>
+              Головна <i class="fa fa-home"></i></a></li>
+          <li class="nav-links-item"><a class="nav-links" href="#favourites"><i class="fas fa-heart"></i> Обрані
+              подарунки <i class="fas fa-heart"></i></a></li>
+          <li class="nav-links-item"><a class="nav-links" href="#basket"><i class="fas fa-shopping-basket"></i> Кошик <i
+                class="fas fa-shopping-basket"></i></a></li>
+          <li class="nav-links-item"><a class="nav-links" href="#my-data"><i class='fas fa-database'></i> Особисті дані
+              <i class='fas fa-database'></i></a></li>
+          <li class="nav-links-item"><a class="nav-links" href="#my-ideas"><i class='fas fa-lightbulb'></i> Мої
+              ідеї <i class='fas fa-lightbulb'></i></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="menu" class="fa fa-bars"></div>
+    <main>
+    </main>
+  </div>
+  <script src="./scripts/myAccount.js"></script>
+</body>
+
 </html>

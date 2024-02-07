@@ -1,5 +1,6 @@
 main {
   min-height: 100vh;
+  padding: 20px 0px;
 }
 
 .shop-button {
@@ -85,8 +86,8 @@ main {
   gap: 30px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 
 .gifts-list-item {
@@ -102,6 +103,7 @@ main {
 .gift-img {
   width: 300px;
   height: 300px;
+  border-radius: 10px;
 }
 
 .gift-name {
