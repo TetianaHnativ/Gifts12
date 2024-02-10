@@ -203,7 +203,7 @@ const gifts = [{
     number: 290,
 },]
 
-const giftsList = document.querySelector(".gifts-list");
+const giftsList = document.querySelector(".gifts-list"); // сам список
 
 gifts.forEach(element => {
     const li = document.createElement('li');
@@ -221,20 +221,169 @@ gifts.forEach(element => {
     giftsList.append(li);
 });
 
-const giftsListItem = document.querySelectorAll('.gifts-list-item');
+const giftsListItem = document.querySelectorAll('.gifts-list-item'); // список усіх товарів
 
 giftsList.addEventListener('click', (evt) => {
     const giftsListItem = evt.target.closest('.gifts-list-item');
     const giftId = giftsListItem.getAttribute('data-id');
 
-    /*const giftImg = giftsListItem.querySelector('img');
-    const giftImgSrc = giftImg.getAttribute('src');
-
-    const giftName = giftsListItem.querySelector('.gift-name').textContent;
-    const giftCategory = giftsListItem.querySelector('.gift-category').textContent;
-    const giftPrice = giftsListItem.querySelector('.gift-price').textContent;*/
-
     const gift = gifts.find(element => element.id === Number(giftId));
     const giftString = JSON.stringify(gift);
     localStorage.setItem('gift', giftString);
 })
+
+
+
+//Кнопки-категорії
+const buttonsList = document.querySelector('.buttons-list');
+buttonsList.addEventListener('click', (evt) => {
+    const shopButton = evt.target.closest('.shop-button');
+    const categoryButton = shopButton.textContent;
+    filterGifts(categoryButton);
+})
+
+const filterGifts = (filter) => {
+    giftsListItem.forEach((gift) => {
+        const categoryGift = gift.querySelector(".gift-category").textContent;
+        if (filter !== "Усі" && categoryGift !== filter) {
+            gift.style.display = "none";
+        } else {
+            gift.style.display = "flex";
+        }
+    });
+    searchInput.value = "";
+};
+
+// Валідація імпута пошуку
+const searchInput = document.querySelector(".search");
+
+function removeSpaces() {
+    searchInput.value = searchInput.value.trim().replace(/\s+/g, ' ');
+}
+
+window.addEventListener("pageshow", function () {
+    searchInput.value = "";
+});
+
+//Пошук товару по назві
+const searchButton = document.querySelector('.search-button');
+searchButton.addEventListener('click', () => {
+    searchGift();
+})
+
+function searchGift() {
+    const search = searchInput.value.toLowerCase();
+    giftsListItem.forEach((gift) => {
+        const giftName = gift.querySelector('.gift-name').textContent.toLowerCase();
+        // Перевірити, чи назва товару містить введений рядок
+        if (giftName.includes(search)) {
+            gift.style.display = "flex";
+        } else {
+            gift.style.display = "none";
+        }
+    });
+}
+
+//Cортування за ціною
+const sortList = document.querySelector(".sort-list");
+
+sortList.addEventListener('change', () => {
+    sortItems();
+})
+
+function sortItems() {
+    const sortValue = sortList.value;
+    const giftsArray = Array.from(giftsListItem);
+
+    // Функція для сортування за ціною
+    function sortByPrice() {
+        giftsArray.sort(function (a, b) {
+            let priceA = parseInt(
+                a.getElementsByClassName("gift-price")[0].innerText
+            );
+            let priceB = parseInt(
+                b.getElementsByClassName("gift-price")[0].innerText
+            );
+            return priceA - priceB;
+        });
+    }
+
+    // Виконуємо відповідне сортування в залежності від обраного варіанту
+    if (sortValue === "cheap") {
+        sortByPrice(); // Сортування від дешевих до дорогих
+    } else if (sortValue === "expensive") {
+        sortByPrice(); // Сортування від дорогих до дешевих
+        giftsArray.reverse(); // Зворотнє сортування, оскільки відбувається від дорогих до дешевих
+    }
+
+    // Перерозташовуємо відсортовані елементи
+    giftsList.innerHTML = ''; // Очищуємо вміст контейнера
+    giftsArray.forEach(function (item) {
+        giftsList.appendChild(item);
+    });
+}
+
+//Анкета
+const clickedButton = sessionStorage.getItem('clickedButton');
+
+if (clickedButton === 'true') {
+    // Очищення прапорця, що підтверджує перехід через клік на кнопку
+    sessionStorage.removeItem('clickedButton');
+
+    const questionnaireString = localStorage.getItem('filter');
+
+    let questionnaireFilter = []
+
+    if (questionnaireString) {
+        questionnaireFilter = JSON.parse(questionnaireString);
+    }
+
+    //console.log(questionnaireFilter); - перевірка 1 
+
+    let categories = [];
+
+    if (questionnaireFilter) {
+        if (questionnaireFilter.includes("male")) {
+            categories.push("Для чоловіків");
+        }
+        if (questionnaireFilter.includes("female")) {
+            categories.push("Для жінок");
+        }
+        if (questionnaireFilter.includes("child")) {
+            categories.push("Для дітей");
+        }
+        if (questionnaireFilter.includes("elderly")) {
+            categories.push("Для літніх людей");
+        }
+        if (questionnaireFilter.includes("office") || questionnaireFilter.includes("child") || questionnaireFilter.includes("blogging")) {
+            categories.push("Канцелярія");
+        }
+        if (questionnaireFilter.includes("technology") || questionnaireFilter.includes("blogging")) {
+            categories.push("Техніка");
+        }
+        if (questionnaireFilter.includes("housekeeping")) {
+            categories.push("Товари для дому");
+        }
+        if (questionnaireFilter.includes("christmas") || questionnaireFilter.includes("st-valentine-day") || questionnaireFilter.includes("st-nicholas-day")) {
+            categories.push("Свята");
+        }
+    } else {
+        console.log("Користувач просто заходить на другу сторінку");
+    }
+
+    // console.log(categories); - перевірка 2
+
+    const filterGiftsQuestionnaire = (categories) => {
+        giftsListItem.forEach((gift) => {
+            const categoryGift = gift.querySelector(".gift-category").textContent;
+            if (categories.includes(categoryGift)) {
+                gift.style.display = "flex";
+            } else {
+                gift.style.display = "none";
+            }
+        });
+        searchInput.value = "";
+    };
+
+    filterGiftsQuestionnaire(categories);
+}

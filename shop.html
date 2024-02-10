@@ -62,18 +62,18 @@
 
       <div class="sort-search-container">
         <div class="search-container">
-          <input type="search" class="search" placeholder="Пошук" />
+          <input type="search" class="search" placeholder="Пошук по назві" onblur="removeSpaces()" />
           <button type="submit" class="search-button">Пошук</button>
         </div>
 
         <select class="sort-list">
-          <option value="1" class="sort-option">
+          <option value="general" class="sort-option">
             Загальний порядок сортування
           </option>
-          <option value="2" class="sort-option">
+          <option value="cheap" class="sort-option">
             Від дешевих до дорогих
           </option>
-          <option value="3" class="sort-option">
+          <option value="expensive" class="sort-option">
             Від дорогих до дешевих
           </option>
         </select>

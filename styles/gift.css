@@ -12,6 +12,7 @@ main {
   align-items: center;
   gap: 15px;
   max-width: 600px;
+  padding: 10px;
 }
 
 .gift-img {
@@ -74,8 +75,8 @@ main {
 }
 
 .gift-buttons {
+  padding: 10px;
   display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
