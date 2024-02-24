@@ -90,19 +90,19 @@ main {
   margin-bottom: 50px;
 }
 
-.gifts-list-item {
+.gifts-list-item a {
   border: 1px solid #038cff;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding-bottom: 5px;
-  max-width: 300px;
+  gap: 8px;
+  padding-bottom: 8px;
+  max-width: 280px;
   border-radius: 10px;
 }
 
 .gift-img {
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   border-radius: 10px;
 }
 

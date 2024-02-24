@@ -1,52 +1,101 @@
 main {
-    background-image: url(../imgs/Ukrainian-flag-img.jpg);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .registration {
-    background-color: #ffbe03;
-    max-width: 400px;
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  
-    gap: 22px;
-    padding: 20px;
-    border: 5px outset #ffbe03;
-    border-radius: 10px;
-  }
-  
-  .registration-title {
-    font-size: 30px;
-    color: #053053;
-  }
-  
-  .registration-parameter {
-    font-size: 20px;
-    text-align: center;
-    padding: 5px;
-  }
-  
-  .registration-button {
-    font-size: 25px;
-    text-align: center;
-    background-color: #053053;
-    color: #fff;
-    border-color:#053053;
-    cursor: pointer;
-  }
-  
-  .authorization-question {
-    font-size: 18px;
-    align-items: center;
-  }
-  
-  .authorization-link {
-    color: #038cff;
-  }
+  background-image: url(../imgs/Ukrainian-flag-img.jpg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration {
+  background-color: #ffbe03;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 22px;
+  padding: 20px;
+  margin: 50px 0px;
+  border: 5px outset #ffbe03;
+  border-radius: 10px;
+}
+
+.registration-title {
+  font-size: 30px;
+  color: #053053;
+}
+
+.registration-parameter {
+  font-size: 20px;
+  text-align: center;
+  padding: 5px;
+}
+
+.registration-button {
+  font-size: 25px;
+  text-align: center;
+  background-color: #053053;
+  color: #fff;
+  border-color: #053053;
+  cursor: pointer;
+}
+
+.authorization-question {
+  font-size: 18px;
+  align-items: center;
+}
+
+.authorization-link {
+  color: #038cff;
+}
+
+.message {
+  color: rgb(255, 0, 0);
+}
+
+/*Modal form*/
+.modal-form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-form {
+  position: relative;
+  background-color: #ebed4d;
+
+  padding: 20px 20px 40px 20px;
+  text-align: center;
+  min-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.modal-form-title {
+  font-size: 25px;
+  color: #053053;
+  text-align: center;
+  margin-top: 20px;
+}

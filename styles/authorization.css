@@ -16,8 +16,9 @@ main {
   justify-content: center;
   align-items: center;
 
-  gap: 40px;
+  gap: 20px;
   padding: 50px;
+  margin: 10px 0px;
   border: 5px outset #ffbe03;
   border-radius: 10px;
 }
@@ -38,7 +39,7 @@ main {
   text-align: center;
   background-color: #053053;
   color: #fff;
-  border-color:#053053;
+  border-color: #053053;
   cursor: pointer;
 }
 
@@ -49,4 +50,20 @@ main {
 
 .registration-link {
   color: #038cff;
+}
+
+.password-link {
+  font-size: 18px;
+  background-color: #ebed4d;
+  color: #038cff;
+  border: solid 2px #053053;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.password-link:hover,
+.password-link:focus {
+  color: #053053;
 }

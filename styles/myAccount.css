@@ -7,6 +7,7 @@
 
 body {
     scrollbar-color: red;
+    /*overflow: scroll; - Завжди відображати прокрутку */
 }
 
 
@@ -21,16 +22,17 @@ header {
     height: 100%;
     width: 300px;
     display: flex;
-    gap: 50px;
+    gap: 5vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .user {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 2vh;
 }
 
 .fa-user-circle {
@@ -46,13 +48,13 @@ header {
 .nav-list {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 3.5vh;
 }
 
 .nav-links-item {
     background-color: #038cff;
     border-radius: 15px;
-    padding: 12px 5px;
+    padding: 10px 5px;
 }
 
 .nav-links {

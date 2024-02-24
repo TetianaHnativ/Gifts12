@@ -12,10 +12,6 @@
 }
 
 @media (max-width: 500px) {
-  main {
-    padding: 0px;
-  }
-
   .gift-img {
     width: 200px;
     height: 200px;
