@@ -1,4 +1,5 @@
 footer {
+  padding: 15px 0px;
   min-height: 80px;
   background-color: #ebed4d;
   display: flex;
@@ -36,6 +37,8 @@ address a:focus {
 .contacts-list {
   display: flex;
   gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .contacts-list-item {

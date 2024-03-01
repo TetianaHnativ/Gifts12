@@ -57,20 +57,10 @@ form.addEventListener("submit", function (event) {
 });
 
 async function hashPassword(password) {
-  // Створюємо екземпляр алгоритму хешування SHA-256
-  const hashBuffer = await crypto.subtle.digest(
-    "SHA-256",
-    new TextEncoder().encode(password)
-  );
-
-  // Конвертуємо отриманий буфер у шістнадцятковий рядок
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashedPassword = hashArray
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-
+  const hashedPassword = sha256(password);
   return hashedPassword;
 }
+
 
 async function saveUserData() {
   const hashedPassword = await hashPassword(password.value);

@@ -1,131 +1,92 @@
 <!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,700&family=Raleway:wght@700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,700&family=Raleway:wght@700&display=swap"
+    rel="stylesheet" />
 
-    <link rel="stylesheet" href="./styles/reset.css" />
-    <link rel="stylesheet" href="./styles/header.css" />
-    <link rel="stylesheet" href="./styles/registration.css" />
-    <link rel="stylesheet" href="./styles/footer.css" />
-    <link rel="stylesheet" href="./styles/adaptiveHeaderFooter.css" />
-    <link rel="stylesheet" href="./styles/adaptiveRegistration.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
-    <title>Gifts</title>
-  </head>
+  <link rel="stylesheet" href="./styles/reset.css" />
+  <link rel="stylesheet" href="./styles/header.css" />
+  <link rel="stylesheet" href="./styles/registration.css" />
+  <link rel="stylesheet" href="./styles/footer.css" />
+  <link rel="stylesheet" href="./styles/adaptiveHeaderFooter.css" />
+  <link rel="stylesheet" href="./styles/adaptiveRegistration.css" />
 
-  <body>
-    <div class="wrapper">
-      <header>
-        <a class="logo" href="index.html"
-          ><img
-            class="logo-icon"
-            src="./imgs/logo-icon.jpg"
-            alt="logo-icon, gift"
-          />
-          Favorite<span class="logo-title-part2">Gift</span></a
-        >
+  <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
+  <title>Gifts</title>
+</head>
 
-        <nav>
-          <ul class="header-links-list">
-            <li class="header-links-item">
-              <a class="main-link" href="index.html">Головна</a>
-            </li>
-            <li class="header-links-item">
-              <a class="shop-link" href="shop.html">Магазин подарунків</a>
-            </li>
-            <li class="header-links-item">
-              <a class="idea-link" href="index.html">Ідеї для подарунків</a>
-            </li>
-          </ul>
-        </nav>
+<body>
+  <div class="wrapper">
+    <header>
+      <a class="logo" href="index.html"><img class="logo-icon" src="./imgs/logo-icon.jpg" alt="logo-icon, gift" />
+        Favorite<span class="logo-title-part2">Gift</span></a>
 
-        <a href="authorization.html" class="login-link">Login</a>
-      </header>
-      <main>
-        <form class="registration" action="./authorization.html">
-          <h1 class="registration-title">Реєстрація</h1>
-          <input
-            type="text"
-            class="registration-parameter"
-            id="surname"
-            placeholder="Введіть прізвище"
-            required
-          />
-          <input
-            type="text"
-            class="registration-parameter"
-            id="name"
-            placeholder="Введіть ім'я"
-            required
-          />
-          <input
-            type="tel"
-            class="registration-parameter"
-            id="phone"
-            placeholder="Введіть номер телефону"
-            minlength="13"
-            maxlength="13"
-            pattern="\+[0-9]{12}"
-            title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX"
-            required
-          />
-          <input
-            type="email"
-            class="registration-parameter"
-            id="login"
-            placeholder="Введіть електронну пошту"
-            pattern=".+@.+\..+"
-            title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com"
-            required
-          />
+      <nav class="bacis-navigation">
+        <ul class="header-links-list">
+          <li class="header-links-item">
+            <a class="main-link" href="index.html"><span class="text">Головна</span> <i class="fas fa-home"
+                title="Головна"></i></a>
+          </li>
+          <li class="header-links-item">
+            <a class="shop-link" href="shop.html"><span class="text">Магазин подарунків</span> <i
+                class="fas fa-shopping-cart" title="Магазин подарунків"></i></a>
+          </li>
+          <li class="header-links-item">
+            <a class="idea-link" href="index.html"><span class="text">Ідеї для подарунків</span> <i
+                class='fas fa-lightbulb' title="Ідеї для подарунків"></i></a>
+          </li>
+        </ul>
+      </nav>
 
-          <input type="password" class="registration-parameter" id="password"
-          placeholder="Введіть пароль"
+      <a href="authorization.html" class="login-link">Login</a>
+    </header>
+    <main>
+      <form class="registration" action="./authorization.html">
+        <h1 class="registration-title">Реєстрація</h1>
+        <input type="text" class="registration-parameter" id="surname" placeholder="Введіть прізвище" required />
+        <input type="text" class="registration-parameter" id="name" placeholder="Введіть ім'я" required />
+        <input type="tel" class="registration-parameter" id="phone" placeholder="Введіть номер телефону" minlength="13"
+          maxlength="13" pattern="\+[0-9]{12}" title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX" required />
+        <input type="email" class="registration-parameter" id="login" placeholder="Введіть електронну пошту"
+          pattern=".+@.+\..+"
+          title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com" required />
+
+        <input type="password" class="registration-parameter" id="password" placeholder="Введіть пароль"
           pattern="^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)\S*$" title="Пароль
           має містити хоча б одну велику та маленьку літери та хоча б одну
           цифру, все без пробілів!" minlength="8" required />
 
-          <input
-            type="password"
-            class="registration-parameter"
-            id="password-confirmation"
-            placeholder="Підтвердьте пароль"
-            minlength="8"
-            required
-          />
-          <p class="message"></p>
-          <button class="registration-button">Зареєструватися</button>
-          <p class="authorization-question">
-            Вже зареєстровані?
-            <a href="./authorization.html" class="authorization-link"
-              >Ввійдіть у систему!</a
-            >
-          </p>
-        </form>
-      </main>
-    </div>
+        <input type="password" class="registration-parameter" id="password-confirmation"
+          placeholder="Підтвердьте пароль" minlength="8" required />
+        <p class="message"></p>
+        <button class="registration-button">Зареєструватися</button>
+        <p class="authorization-question">
+          Вже зареєстровані?
+          <a href="./authorization.html" class="authorization-link">Ввійдіть у систему!</a>
+        </p>
+      </form>
+    </main>
+  </div>
 
-    <div class="modal-form-container" id="message-modal">
-      <div class="modal-form">
-        <button class="modal-close-button">x</button>
-        <h3 class="modal-form-title">Реєстрація успішна!</h3>
-      </div>
+  <div class="modal-form-container" id="message-modal">
+    <div class="modal-form">
+      <button class="modal-close-button">x</button>
+      <h3 class="modal-form-title">Реєстрація успішна!</h3>
     </div>
-    <script src="scripts/registration.js"></script>
-  </body>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+  <script src="scripts/registration.js"></script>
+</body>
+
 </html>

@@ -22,7 +22,7 @@ header {
 }
 
 .logo-icon {
-  max-width: 30px;
+  max-width: 25px;
 }
 
 .main-link {
@@ -73,4 +73,8 @@ header {
 .header-links-item {
   text-align: center;
   align-items: center;
+}
+
+.header-links-item .fas {
+  display: none;
 }

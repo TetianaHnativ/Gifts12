@@ -1,8 +1,12 @@
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   /*Header*/
   header {
     gap: 1%;
-    padding: 0 0px;
+    padding: 0 5px;
+  }
+
+  .logo-icon {
+    width: 20px;
   }
 
   .logo {
@@ -14,7 +18,7 @@
   }
 
   .login-link {
-    padding: 4px;
+    padding: 5px;
     font-size: 15px;
   }
 
@@ -34,8 +38,8 @@
   }
 
   .contacts-list {
-    display: block;
-    gap: 0px;
+    flex-direction: column;
+    gap: 10px;
     font-size: 12px;
   }
 
@@ -45,7 +49,7 @@
   }
 
   .social-networks-list {
-    gap: 5px;
+    gap: 10px;
   }
 
   .fab {
@@ -56,17 +60,21 @@
 @media (max-width: 500px) {
   /*Header*/
 
+  .logo-icon {
+    width: 20px;
+  }
+
   .logo {
-    font-size: 15px;
+    font-size: 18px;
   }
 
-  .header-links-list {
-    flex-direction: column;
-    gap: 5px;
+  .header-links-item .text {
+    display: none;
   }
 
-  .header-links-item {
-    font-size: 12px;
+  .header-links-item .fas {
+    display: inline;
+    font-size: 20px;
   }
 
   .login-link {
