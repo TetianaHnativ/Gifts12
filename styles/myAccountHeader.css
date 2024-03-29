@@ -81,6 +81,20 @@ header {
     display: none;
 }
 
+.log-out {
+    background-color: rgb(201, 76, 76);
+    border-color:rgb(173, 50, 50);
+    color: #fff;
+    font-size: 25px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.log-out:focus,
+.log-out:hover {
+    background-color:rgb(173, 50, 50);
+}
+
 /*Adaptive*/
 @media (max-width: 1000px) {
     header {

@@ -1,0 +1,47 @@
+@media (max-width: 1000px) {
+    main {
+        flex-direction: column;
+        gap: 20px;
+        padding: 50px 0px;
+    }
+
+    .idea-img {
+        width: 350px;
+        height: 350px;
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .idea-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .idea-name {
+        font-size: 22px;
+    }
+
+    .idea-author {
+        font-size: 15px;
+    }
+
+    .idea-price {
+        font-size: 20px;
+    }
+
+    .idea-phone {
+        font-size: 15px;
+    }
+
+    .idea-description {
+        font-size: 15px;
+    }
+
+    .idea-selected {
+        font-size: 15px;
+        padding: 5px;
+    }
+
+}

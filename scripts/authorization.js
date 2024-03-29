@@ -1,4 +1,4 @@
-const message = document.querySelector(".message");
+const messageAuthorization = document.getElementById("message-authorization");
 const form = document.querySelector(".authorization");
 const passwordLink = document.querySelector('.password-link');
 
@@ -8,17 +8,20 @@ const passwordEnter = document.getElementById("password");
 // Модальне вікно
 const messageModal = document.getElementById("message-modal");
 const messageCloseButton = document.getElementById("message-close-button");
+const messageTitle = document.getElementById('message-title');
 
 messageCloseButton.addEventListener("click", function () {
     messageModal.style.display = "none";
     form.submit(); // Відправляємо форму
+    authorizationModal.submit();
 });
 
 // Модальне вікно для відновлення паролю
 const authorizationModal = document.getElementById('authorization-modal');
 const authorizationCloseButton = document.getElementById("authorization-close-button");
-const modalFormSubmit = document.querySelector(".modal-form-submit");
-const modalEmail = document.getElementById("modal-email");
+const modalFormSubmit = document.querySelector(".modal-form");
+const modalPassword = document.getElementById("modal-password");
+const messageModalPassword = document.getElementById("message-modal-password");
 
 passwordLink.addEventListener("click", function () {
     authorizationModal.style.display = "flex";
@@ -26,6 +29,8 @@ passwordLink.addEventListener("click", function () {
 
 authorizationCloseButton.addEventListener("click", function () {
     authorizationModal.style.display = "none";
+    modalPassword.value = "";
+    messageModalPassword.textContent = "";
 });
 
 function gaps(event) {
@@ -34,14 +39,19 @@ function gaps(event) {
     }
 }
 
-function trimEmail(event) {
-    event.target.value = event.target.value.trim();
-}
-
 modalFormSubmit.addEventListener("input", gaps);
 
-modalEmail.addEventListener("blur", trimEmail); // blur - втрата фокусу елементом
+modalFormSubmit.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (modalPassword.value === "Tornado2003") {
+        ModalMessage("Ваш пароль оновлено!");
+    } else {
+        messageModalPassword.textContent = "Пароль неправильний!";
+    }
+});
 
+
+///////////////////////////////////////////////////
 
 const userData = localStorage.getItem("user");
 
@@ -55,7 +65,7 @@ form.addEventListener("submit", async function (event) {
 
         await change(loginUser, passwordUser);
     } else {
-        message.textContent = "Вас немає в системі, зареєструйтеся, будь ласка!";
+        messageAuthorization.textContent = "Вас немає в системі, зареєструйтеся, будь ласка!";
     }
 });
 
@@ -73,15 +83,22 @@ async function change(loginUser, passwordUser) {
 
         localStorage.setItem("userLogin", JSON.stringify(userLogIn));
 
-        setTimeout(function () {
-            messageModal.style.display = "flex";
-        }, 0);
-
-        setTimeout(function () {
-            messageModal.style.display = "none";
-            form.submit();
-        }, 4000);
+        ModalMessage("Авторизація успішна!");
     } else {
-        message.textContent = "Логін або пароль неправильні!";
+        messageAuthorization.textContent = "Логін або пароль неправильні!";
     }
+}
+
+function ModalMessage(title) {
+    setTimeout(function () {
+        messageTitle.textContent = title;
+        authorizationModal.style.display = "none";
+        messageModal.style.display = "flex";
+    }, 0);
+
+    setTimeout(function () {
+        messageModal.style.display = "none";
+        form.submit();
+        authorizationModal.submit();
+    }, 4000);
 }

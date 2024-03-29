@@ -56,8 +56,8 @@ main {
   color: rgb(255, 0, 0);
 }
 
-/*Modal form*/
-.modal-form-container {
+/*Modal*/
+.modal-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -70,7 +70,7 @@ main {
   justify-content: center;
 }
 
-.modal-form {
+.container {
   position: relative;
   background-color: #ebed4d;
 
@@ -93,7 +93,7 @@ main {
   cursor: pointer;
 }
 
-.modal-form-title {
+.modal-title {
   font-size: 25px;
   color: #053053;
   text-align: center;

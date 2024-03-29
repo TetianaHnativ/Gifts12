@@ -112,6 +112,7 @@ main {
   font-size: 18px;
   text-shadow: -1px -1px 0 #053053, 1px -1px 0 #053053, -1px 1px 0 #053053,
     1px 1px 0 #053053;
+  letter-spacing: 1.5px;
 }
 
 .gift-category {

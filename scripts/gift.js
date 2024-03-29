@@ -2,10 +2,10 @@ const giftString = localStorage.getItem('gift');
 
 let gift = {
     id: 0,
-    imgSrc: "./imgs/hero-img.jpg",
+    imgSrc: "./imgs/gift-img.jpg",
     name: "Not Found",
     category: "Not Found",
-    price: "Not Found",
+    price: 0,
     number: 0,
 };
 
@@ -27,7 +27,7 @@ giftImg.setAttribute("alt", gift.name);
 
 giftName.textContent = gift.name;
 giftCategory.textContent = gift.category;
-giftPrice.textContent = gift.price;
+giftPrice.textContent = gift.price + " грн.";
 
 const giftBasket = document.querySelector(".gift-basket");
 
@@ -44,9 +44,3 @@ if (gift.number > 0) {
     giftBasket.style.backgroundColor = "#CCCCCC";
     giftBasket.style.borderColor = "#CCCCCC";
 }
-
-
-
-
-
-

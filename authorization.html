@@ -42,7 +42,7 @@
                 class="fas fa-shopping-cart" title="Магазин подарунків"></i></a>
           </li>
           <li class="header-links-item">
-            <a class="idea-link" href="index.html"><span class="text">Ідеї для подарунків</span> <i
+            <a class="idea-link" href="ideas.html"><span class="text">Ідеї для подарунків</span> <i
                 class='fas fa-lightbulb' title="Ідеї для подарунків"></i></a>
           </li>
         </ul>
@@ -56,7 +56,7 @@
         <input type="email" class="authorization-parameter" id="login" placeholder="Введіть електронну пошту"
           required />
         <input type="password" class="authorization-parameter" id="password" placeholder="Введіть пароль" required />
-        <p class="message"></p>
+        <p class="message" id="message-authorization"></p>
         <button class="authorization-button">Увійти</button>
         <p class="registration-question">
           Немає акаунту?
@@ -67,23 +67,22 @@
     </main>
   </div>
 
-  <div class="modal-form-container" id="authorization-modal">
-    <div class="modal-form">
+  <div class="modal-container" id="authorization-modal">
+    <div class="container">
       <button class="modal-close-button" id="authorization-close-button">x</button>
-      <h3 class="modal-form-title">Введіть електронну адресу, на яку буде відправлено пароль</h3>
-      <form class="modal-form-submit">
-        <input type="email" class="modal-field-input" id="modal-email" placeholder="example@example.com"
-          pattern=".+@.+\..+"
-          title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com" required />
+      <h3 class="modal-title">На електронну адресу, вказану при реєстрації, прийшов новий пароль</h3>
+      <form class="modal-form">
+        <input type="password" class="modal-field-input" id="modal-password" placeholder="Введіть пароль" required />
+        <p class="message" id="message-modal-password"></p>
         <button class="modal-form-button">Віправити</button>
       </form>
     </div>
   </div>
 
-  <div class="modal-form-container" id="message-modal">
-    <div class="modal-form">
+  <div class="modal-container" id="message-modal">
+    <div class="container">
       <button class="modal-close-button" id="message-close-button">x</button>
-      <h3 class="modal-form-title">Авторизація успішна!</h3>
+      <h3 class="modal-title" id="message-title">Операція успішна!</h3>
     </div>
   </div>
 

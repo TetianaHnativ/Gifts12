@@ -1,0 +1,60 @@
+@media (max-width: 1200px) {
+    .sort-list-decorating {
+        width: 250px;
+    }
+
+    .search {
+        font-size: 14px;
+        min-width: 150px;
+    }
+
+    .search-button {
+        font-size: 14px;
+        padding: 5px 2px;
+    }
+
+    #add-button {
+        font-size: 20px;
+        letter-spacing: 1px;
+        padding: 4px 10px;
+    }
+
+    .sort-list {
+        font-size: 14px;
+        padding: 5px 2px;
+    }
+}
+
+@media (max-width: 700px) {
+    .ideas-list-item {
+        max-width: 200px;
+    }
+
+    .idea-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .idea-name {
+        font-size: 16px;
+    }
+
+    .idea-author {
+        font-size: 16px;
+    }
+
+    .idea-price {
+        font-size: 16px;
+    }
+
+    .filters-container {
+        flex-direction: column;
+        gap: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sort-list-decorating {
+        justify-content: center;
+    }
+}
