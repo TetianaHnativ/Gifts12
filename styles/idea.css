@@ -56,12 +56,19 @@ main {
     font-size: 18px;
 }
 
-.idea-description {
+.idea-description-list {
     text-align: center;
     color: #053053;
     font-size: 18px;
     border: 2px solid #ffbc03;
     padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    max-width: 500px;
+    word-wrap: break-word;
 }
 
 .idea-selected {

@@ -49,7 +49,7 @@ main {
     border-color: #038cff;
 }
 
-#add-button {
+.add-button {
     font-size: 22px;
     background-color: #038cff;
     border-color: #053053;
@@ -62,8 +62,8 @@ main {
     border-radius: 10px;
 }
 
-#add-button:hover,
-#add-button:focus {
+.add-button:hover,
+.add-button:focus {
     background-color: #053053;
 }
 
@@ -139,7 +139,7 @@ main {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
 
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -148,14 +148,14 @@ main {
     position: relative;
     background-color: #ebed4d;
 
-    padding: 20px 20px 40px 20px;
+    padding: 15px 10px 20px 10px;
     text-align: center;
-    min-width: 400px;
+    width: 400px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .modal-close-button {
@@ -172,4 +172,49 @@ main {
     color: #053053;
     text-align: center;
     margin-top: 20px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.img-button {
+    text-align: center;
+    background-color: #ebed4d;
+    border: solid 2px #ffbc03;
+    color: #038cff;
+    font-size: 20px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.img-button:hover,
+.img-button:focus {
+    background-color: #ffbc03;
+}
+
+#file-download {
+    display: none;
+}
+
+.custom-button-label {
+    cursor: pointer;
+}
+
+.modal-input {
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal-textarea {
+    font-size: 18px;
+}
+
+#submit-button {
+    font-size: 20px;
 }

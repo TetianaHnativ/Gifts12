@@ -59,7 +59,7 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <button id="add-button">Додати ідею</button>
+                    <button id="add-idea" class="add-button" onclick="openModal()">Додати ідею</button>
                 </div>
 
                 <div class="sort-list-decorating">
@@ -126,15 +126,27 @@
     </div>
     <div class="modal-container" id="add-idea-modal">
         <div class="container">
-          <button class="modal-close-button">x</button>
-          <h3 class="modal-title">Додай ідею</h3>
-          <input type="text" placeholder="Назва ідеї">
-          <input type="text" name="" placeholder="Ціна" value=0>
-          <input type="text" name="" placeholder="Номер телефону">
-          <textarea name="" id="" cols="30" rows="10"></textarea>
-
+            <button class="modal-close-button" onclick="closeModal()">x</button>
+            <h3 class="modal-title">Додай ідею</h3>
+            <form id="idea-form" action="" class="modal-form">
+                <label for="file-download" class="img-button">
+                    Зображення
+                    <input type="file" id="file-download" accept="image/*" />
+                </label>
+                <input type="text" id="name" class="modal-input" placeholder="Назва ідеї" required />
+                <input type="text" id="price" class="modal-input" name="price" placeholder="Ціна"
+                    pattern="^(?=.*[0-9])\d*(?:\.\d{0,2})?$" maxlength="8"
+                    title="Ціна може бути цілим або десятковим числом з не більше, ніж з двома знаками після КРАПКИ"
+                    required />
+                <input type="tel" id="phone" class="modal-input" name="phone" placeholder="Номер телефону" minlength="13"
+                    maxlength="13" pattern="\+[0-9]{12}" title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX"
+                    required />
+                <textarea id="description" class="modal-textarea" name="" id="" cols="30" rows="10" placeholder="Опис"
+                    required></textarea>
+                <button id="submit-button" class="add-button">Додати</button>
+            </form>
         </div>
-      </div>
+    </div>
     <script src="./scripts/ideas.js"></script>
 </body>
 

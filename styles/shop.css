@@ -90,20 +90,38 @@ main {
   margin-bottom: 50px;
 }
 
+.gifts-list-item {
+  height: 400px;
+}
+
 .gifts-list-item a {
   border: 1px solid #038cff;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+
+  justify-content: space-between;
+
+  gap: 10px;
   padding-bottom: 8px;
   max-width: 280px;
   border-radius: 10px;
+
+  height: 400px;
 }
 
 .gift-img {
   width: 280px;
   height: 280px;
   border-radius: 10px;
+}
+
+.gift-information {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .gift-name {

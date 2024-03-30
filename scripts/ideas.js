@@ -6,20 +6,7 @@ const ideas = [
         author: "Julia Divuk",
         price: 180,
         phone: "+380667833456",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        3. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit.
-        4. Laborum quisquam ipsam officiis nemo
-        5. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        6. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. 
-        7. Laborum quisquam ipsam officiis nemo
-        8. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur 
-        9. at! Consequatur tempore ipsum ullam veniam.`,
+        description: ["jhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdh", "ndsivnsdivjhcjsdhjhcjsdh", "njdvkdsnvkdsfjhcjsdhn", "jvnvjfdnvjfdn", "jhcjhcjsdhjhcjsdhjhcjsdhjhcjsdhjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
     },
     {
         id: 2,
@@ -28,11 +15,7 @@ const ideas = [
         author: "Anna Ravna",
         price: 100,
         phone: "+380667833456",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        3. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit.`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
     },
     {
         id: 3,
@@ -41,9 +24,7 @@ const ideas = [
         author: "Maria Naum",
         price: 0,
         phone: "+380667833456",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
     },
     {
         id: 4,
@@ -52,14 +33,7 @@ const ideas = [
         author: "Tetiana Hnativ",
         price: 200,
         phone: "+380503388467",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        3. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit.
-        4. Laborum quisquam ipsam officiis nemo
-        5. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv"],
     },
     {
         id: 5,
@@ -68,20 +42,7 @@ const ideas = [
         author: "Julia Divuk",
         price: 0,
         phone: "",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        3. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit.
-        4. Laborum quisquam ipsam officiis nemo
-        5. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        6. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. 
-        7. Laborum quisquam ipsam officiis nemo
-        8. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur 
-        9. at! Consequatur tempore ipsum ullam veniam.`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh"],
     },
     {
         id: 6,
@@ -90,12 +51,7 @@ const ideas = [
         author: "Anna Ravna",
         price: 100,
         phone: "+380667833456",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        3. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit.
-        4. Laborum quisquam ipsam officiis nemo`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn"],
     },
     {
         id: 7,
@@ -104,9 +60,7 @@ const ideas = [
         author: "Maria Naum",
         price: 150,
         phone: "+380503388467",
-        description: `1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
     },
     {
         id: 8,
@@ -115,14 +69,7 @@ const ideas = [
         author: "Tetiana Hnativ",
         price: 0,
         phone: "",
-        description: ` 1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quisquam ipsam officiis nemo
-        2. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur
-        3. at! Consequatur tempore ipsum ullam veniam.Lorem ipsum dolor sit amet consectetur adipisicing
-        elit.
-        4. Laborum quisquam ipsam officiis nemo
-        5. nesciunt quaerat, nam mollitia voluptatibus corrupti dolorem, doloribus reiciendis ea
-        consequuntur`,
+        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
     },
 ]
 
@@ -223,3 +170,70 @@ function sortItems() {
         ideasList.appendChild(item);
     });
 }
+
+//Модальне вікно
+const modalContainer = document.querySelector(".modal-container");
+
+const openModal = () => {
+    modalContainer.style.display = "flex";
+};
+
+const closeModal = () => {
+    modalContainer.style.display = "none";
+};
+
+const ideaForm = document.getElementById('idea-form');
+
+let newIdea = {
+    id: 100,
+    imgSrc: "",
+    name: "",
+    author: "",
+    price: "",
+    phone: "",
+    description: "",
+}
+
+let picture = "";
+let name = "";
+let author = "";
+let price = "";
+let phone = "";
+let description = "";
+
+ideaForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const id = 100;
+    picture = document.getElementById("file-download").files[0];
+    name = document.getElementById("name").value;
+    author = "Tetiana Hnativ";
+    price = document.getElementById("price").value;
+    phone = document.getElementById("phone").value;
+    description = document.getElementById("description").value;
+
+    newIdea = {
+        id: id,
+        imgSrc: picture,
+        name: name,
+        author: author,
+        price: price,
+        phone: phone,
+        description: description,
+    }
+
+    localStorage.setItem("newIdea", JSON.stringify(newIdea));
+
+    let addIdea = JSON.parse(localStorage.getItem("newIdea"));
+
+    if (addIdea) {
+        if (addIdea.description) {
+            addIdea.description = addIdea.description.split("\n");
+        }
+        ideas.push(addIdea);
+    }
+
+    console.log(ideas);
+});
+
+

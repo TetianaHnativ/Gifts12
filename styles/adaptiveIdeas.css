@@ -58,3 +58,31 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 500px) {
+    .container {
+        padding: 15px 0px;
+        max-width: 300px;
+    }
+
+    .modal-title {
+        font-size: 22px;
+    }
+
+    .img-button {
+        font-size: 18px;
+    }
+
+
+    .modal-input {
+        font-size: 18px;
+    }
+
+    .modal-textarea {
+        font-size: 15px;
+    }
+
+    #submit-button {
+        font-size: 18px;
+    }
+}
