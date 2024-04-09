@@ -89,85 +89,92 @@
         <section id="my-data">
           <h2 class="important-title data-main-title">Особисті дані</h2>
           <form action="" class="my-data-form">
-            <input
-              type="text"
-              class="my-data-parameter"
-              id="surname"
-              placeholder="Введіть прізвище"
-              value="Hnativ"
-              required
-            />
-            <input
-              type="text"
-              class="my-data-parameter"
-              id="name"
-              placeholder="Введіть ім'я"
-              value="Tetiana"
-              required
-            />
-            <input
-              type="tel"
-              class="my-data-parameter"
-              id="phone"
-              placeholder="Введіть номер телефону"
-              value="+380995288726"
-              minlength="13"
-              maxlength="13"
-              pattern="\+[0-9]{12}"
-              title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX"
-              required
-            />
-            <input
-              type="email"
-              class="my-data-parameter"
-              id="login"
-              placeholder="Введіть електронну пошту"
-              value="tetianahnativ2003@gmail.com"
-              pattern=".+@.+\..+"
-              title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com"
-              required
-            />
+            <div class="form-elements">
+              <input
+                type="text"
+                class="my-data-parameter"
+                id="surname"
+                placeholder="Введіть прізвище"
+                required
+              />
+              <input
+                type="text"
+                class="my-data-parameter"
+                id="name"
+                placeholder="Введіть ім'я"
+                required
+              />
+              <input
+                type="tel"
+                class="my-data-parameter"
+                id="phone"
+                placeholder="Введіть номер телефону"
+                minlength="13"
+                maxlength="13"
+                pattern="\+[0-9]{12}"
+                title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX"
+                required
+              />
+              <input
+                type="email"
+                class="my-data-parameter"
+                id="login"
+                placeholder="Введіть електронну пошту"
+                pattern=".+@.+\..+"
+                title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com"
+                required
+              />
+              <div class="old-password-container">
+                <input
+                  type="password"
+                  class="my-data-parameter"
+                  id="old-password"
+                  placeholder="Введіть старий пароль"
+                  minlength="8"
+                />
 
-            <input
-              type="password"
-              class="my-data-parameter"
-              id="password-confirmation"
-              placeholder="Введіть старий пароль"
-              minlength="8"
-              required
-            />
-
-            <input
-              type="password"
-              class="my-data-parameter"
-              id="password"
-              placeholder="Введіть новий пароль"
-              pattern="^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)\S*$"
-              title="Пароль
+                <button type="button" class="my-data-button confirm-button">
+                  Підтвердити
+                </button>
+              </div>
+              <input
+                type="password"
+                class="my-data-parameter"
+                id="new-password"
+                placeholder="Введіть новий пароль"
+                pattern="^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)\S*$"
+                title="Пароль
           має містити хоча б одну велику та маленьку літери та хоча б одну
           цифру, все без пробілів!"
-              minlength="8"
-              autocomplete="new-password"
-              required
-            />
+                minlength="8"
+                autocomplete="new-password"
+                disabled
+              />
+            </div>
             <p class="message"></p>
-            <button type="submit" class="my-data-button">Зберегти</button>
+            <button type="submit" class="my-data-button submit-button">
+              Зберегти
+            </button>
           </form>
         </section>
         <section id="my-ideas">
-          <h2 class="important-title my-ideas-title">
-            Мої ідеї
-          </h2>
+          <h2 class="important-title my-ideas-title">Мої ідеї</h2>
           <ul class="list" id="my-ideas-list"></ul>
         </section>
         <section id="favourites-ideas">
-          <h2 class="important-title favourites-ideas-title">
-            Улюблені ідеї
-          </h2>
+          <h2 class="important-title favourites-ideas-title">Улюблені ідеї</h2>
           <ul class="list" id="favourites-ideas-list"></ul>
         </section>
       </main>
     </div>
+
+    <div class="modal-container" id="message-modal">
+      <div class="container">
+        <button class="modal-close-button" id="message-close-button">x</button>
+        <h3 class="modal-title" id="message-title"></h3>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
     <script src="./scripts/myAccount.js"></script>
   </body>
 </html>

@@ -422,6 +422,108 @@ basketGifts.addEventListener("click", (evt) => {
   localStorage.setItem("gift", giftString);
 });
 
+//section id="my-data"
+const dataForm = document.querySelector(".my-data-form");
+
+const surname = document.getElementById("surname");
+const name = document.getElementById("name");
+const phone = document.getElementById("phone");
+const email = document.getElementById("login");
+const oldPassword = document.getElementById("old-password");
+const newPassword = document.getElementById("new-password");
+
+const confirmPasswordButton = document.querySelector(".confirm-button");
+
+function gaps(event) {
+  if (event.target.value.includes(" ")) {
+    event.target.value = event.target.value.replace(/\s/g, "");
+  }
+}
+
+dataForm.addEventListener("input", gaps);
+
+email.addEventListener("blur", function () {
+  email.value = email.value.trim(); // blur - втрата фокусу елементом
+});
+
+let userData = JSON.parse(localStorage.getItem("user"));
+
+if (userData) {
+  surname.value = userData.surname;
+  name.value = userData.name;
+  phone.value = userData.phone;
+  email.value = userData.email;
+}
+
+// Модальне вікно
+const messageModal = document.getElementById("message-modal");
+const messageCloseButton = document.getElementById("message-close-button");
+const messageTitle = document.getElementById("message-title");
+
+const message = document.querySelector(".message");
+
+messageCloseButton.addEventListener("click", function () {
+  messageModal.style.display = "none";
+  dataForm.submit(); // Відправляємо форму
+});
+
+confirmPasswordButton.addEventListener("click", async function () {
+  if (oldPassword.value) {
+    try {
+      const oldPasswordHash = await hashedPassword(oldPassword.value);
+      if (oldPasswordHash === userData.password) {
+        message.textContent = "";
+        newPassword.disabled = false;
+      } else {
+        message.textContent = "Старий пароль неправильний!";
+        newPassword.disabled = true;
+        newPassword.value = "";
+      }
+    } catch (error) {
+      console.error("Помилка при обчисленні хешу старого пароля:", error);
+    }
+  } else {
+    newPassword.disabled = true;
+    newPassword.value = "";
+    message.textContent = "";
+  }
+  //WebStudio2003
+});
+
+dataForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  messageModal.style.display = "flex";
+  userData.surname = surname.value;
+  userData.name = name.value;
+  userData.phone = phone.value;
+  userData.email = email.value;
+  if (newPassword.value) {
+    userData.password = await hashedPassword(newPassword.value);
+  }
+  localStorage.setItem("user", JSON.stringify(userData));
+  newPassword.value = "";
+  oldPassword.value = "";
+  newPassword.disabled = true;
+  ModalMessage("Дані збережено!");
+});
+
+async function hashedPassword(value) {
+  const hashedPassword = sha256(value);
+  return hashedPassword;
+}
+
+function ModalMessage(title) {
+  setTimeout(function () {
+    messageTitle.textContent = title;
+    messageModal.style.display = "flex";
+  }, 0);
+
+  setTimeout(function () {
+    messageModal.style.display = "none";
+    dataForm.submit();
+  }, 4000);
+}
+
 //section id="my-ideas"
 const myIdeas = document.getElementById("my-ideas-list"); // сам список
 
@@ -459,7 +561,6 @@ myIdeas.addEventListener("click", (evt) => {
   const ideaString = JSON.stringify(idea);
   localStorage.setItem("idea", ideaString);
 });
-
 
 //section id="favourites-ideas"
 const favouritesIdeas = document.getElementById("favourites-ideas-list"); // сам список
