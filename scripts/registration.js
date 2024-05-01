@@ -12,7 +12,7 @@ const modalCloseButton = document.querySelector(".modal-close-button");
 
 modalCloseButton.addEventListener("click", function () {
   messageModal.style.display = "none";
-  form.submit(); // Відправляємо форму
+  form.submit();
 });
 
 //Інші елементи форми
@@ -32,6 +32,10 @@ email.addEventListener("blur", function () {
   email.value = email.value.trim(); // blur - втрата фокусу елементом
 });
 
+window.addEventListener("beforeunload", function () {
+  form.reset(); // Очищаємо всі поля форми
+});
+
 form.addEventListener("submit", function (event) {
   try {
     event.preventDefault(); // Зупиняємо відправку форми
@@ -41,37 +45,55 @@ form.addEventListener("submit", function (event) {
       message.textContent = "";
 
       saveUserData();
-
-      setTimeout(function () {
-        messageModal.style.display = "flex";
-      }, 0);
-
-      setTimeout(function () {
-        messageModal.style.display = "none";
-        form.submit(); // Відправляємо форму
-      }, 4000);
     }
   } catch (error) {
     console.error(error);
   }
 });
 
-async function hashPassword(password) {
-  const hashedPassword = sha256(password);
-  return hashedPassword;
-}
-
 
 async function saveUserData() {
-  const hashedPassword = await hashPassword(password.value);
-
   let userData = {
     surname: surname.value,
     name: name.value,
     phone: phone.value,
     email: email.value,
-    password: hashedPassword,
+    password: password,
   };
 
-  localStorage.setItem("user", JSON.stringify(userData));
+  // Відправлення даних на сервер
+  fetch("./phpDatabase/registrationDatabase.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(userData).toString(), // Кодуємо дані форми
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("status code:" + response.status);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      if (data.trim() === "email is already registered") {
+        message.textContent =
+          "Користувач з такою поштою вже зареєстрований у системі";
+      } else if (data.trim() === "success") {
+        message.textContent = "";
+
+        setTimeout(function () {
+          messageModal.style.display = "flex";
+        }, 0);
+
+        setTimeout(function () {
+          messageModal.style.display = "none";
+          form.reset();
+          form.submit(); // Відправляємо форму
+        }, 4000);
+      }
+    })
+    .catch((error) => {
+      console.error("error: ", error);
+    });
 }

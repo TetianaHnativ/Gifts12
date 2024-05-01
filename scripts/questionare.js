@@ -1,66 +1,91 @@
-//Додати user, id можна зробити автоматичним в БД
+let user = 0;
 
-const questionnaireButton = document.querySelector('.questionnaire-button');
-const questionnaire = {}
+user = parseInt(localStorage.getItem("user"));
+
+const questionnaireButton = document.querySelector(".questionnaire-button");
+
+let questionnaire = {};
+
 const filter = [];
 
-questionnaireButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
+questionnaireButton.addEventListener("click", (evt) => {
+  evt.preventDefault();
 
-    radioButton('receiver');
-    radioButton('age');
-    radioButton('occasion');
-    radioButton('interests');
+  questionnaire = {
+    user: user,
+  };
 
-    const questionnaireString = JSON.stringify(questionnaire);
-    localStorage.setItem('questionnaire', questionnaireString);
+  radioButton("receiver");
+  radioButton("age");
+  radioButton("occasion");
+  radioButton("interests");
 
-    const filterString = JSON.stringify(filter);
-    localStorage.setItem('filter', filterString);
-
-    // Збереження прапорця, що підтверджує перехід через клік на кнопку
-    sessionStorage.setItem('clickedButton', 'true');
-    // Перенаправлення на другу сторінку
-    window.location.href = './shop.html';
-});
-
-
-function radioButton(buttonName) {
-    // Отримуємо всі елементи з типом input та типом "radio" з вказаним іменем
-    const radioButtons = document.querySelectorAll(`input[type="radio"][name=${buttonName}]`);
-
-    // Шукаємо вибрану радіокнопку
-    let selectedRadioButton;
-
-    radioButtons.forEach((radioButton) => {
-        if (radioButton.checked) {
-            selectedRadioButton = radioButton;
-        }
+  // Відправлення даних на сервер
+  fetch("./phpDatabase/questionnaireDatabase.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded", // Встановлюємо правильний заголовок
+    },
+    body: new URLSearchParams(questionnaire).toString(), // Кодуємо дані форми
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text(); // Повертаємо текст відповіді сервера
+    })
+    .then((data) => {
+      console.log(data); // Друкуємо отриману відповідь в консоль
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation: ",
+        error
+      );
     });
 
-    const selectedValue = selectedRadioButton.value;
-    const selectedText = selectedRadioButton.nextSibling.textContent.trim();
+  const filterString = JSON.stringify(filter);
+  sessionStorage.setItem("filter", filterString);
 
-    switch (buttonName) {
-        case "receiver":
-            filter[0] = selectedValue;
-            break;
-        case "age":
-            filter[1] = selectedValue;
-            break;
-        case "occasion":
-            filter[2] = selectedValue;
-            break;
-        case "interests":
-            filter[3] = selectedValue;
-            break;
-        default:
-            console.log("Жодна радіокнопка не вибрана");
-            break;
+  // Збереження прапорця, що підтверджує перехід через клік на кнопку
+  sessionStorage.setItem("clickedButton", "true");
+
+  window.location.href = "./shop.html";
+});
+
+function radioButton(buttonName) {
+  const radioButtons = document.querySelectorAll(
+    `input[type="radio"][name=${buttonName}]`
+  );
+
+  let selectedRadioButton;
+
+  radioButtons.forEach((radioButton) => {
+    if (radioButton.checked) {
+      selectedRadioButton = radioButton;
     }
+  });
 
-    questionnaire[buttonName] = selectedText;
+  const selectedValue = selectedRadioButton.value;
+  const selectedText = selectedRadioButton.nextSibling.textContent.trim();
+
+  switch (buttonName) {
+    case "receiver":
+      filter[0] = selectedValue;
+      break;
+    case "age":
+      filter[1] = selectedValue;
+      break;
+    case "occasion":
+      filter[2] = selectedValue;
+      break;
+    case "interests":
+      filter[3] = selectedValue;
+      break;
+    default:
+      console.log("Жодна радіокнопка не вибрана");
+      break;
+  }
+
+  questionnaire[buttonName] = selectedText;
 }
-
-
-

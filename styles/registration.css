@@ -53,6 +53,7 @@ main {
 }
 
 .message {
+  text-align: center;
   color: rgb(255, 0, 0);
 }
 

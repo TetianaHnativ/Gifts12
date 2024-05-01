@@ -69,6 +69,7 @@ main {
 }
 
 .message {
+  text-align: center;
   color: rgb(255, 0, 0);
 }
 
@@ -90,6 +91,7 @@ main {
   position: relative;
   background-color: #ebed4d;
 
+  margin: 10px;
   padding: 20px 20px 40px 20px;
   text-align: center;
   min-width: 400px;
@@ -132,11 +134,11 @@ main {
 
 .modal-form-button {
   text-align: center;
+  font-size: 16px;
+  padding: 5px;
+  color: #ffbc03;
   background-color: #038cff;
   border-color: #053053;
-  color: #ffbc03;
-  font-size: 18px;
-  padding: 8px;
   cursor: pointer;
   border-radius: 10px;
 }
@@ -144,4 +146,40 @@ main {
 .modal-form-button:focus,
 .modal-form-button:hover {
   background-color: #053053;
+  color: #fff;
+}
+
+#button-modal-save {
+  font-size: 18px;
+  padding: 8px;
+  color: #fff;
+  background-color: #053053;
+  border-color: #053053;
+}
+
+#button-modal-save:focus,
+#button-modal-save:hover {
+  background-color: #038cff;
+  border-color: #038cff;
+  color: #ffbc03;
+}
+
+.modal-field-input:disabled {
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.modal-form-button:disabled,
+#button-modal-save:disabled {
+  color: #053053;
+  background-color: #038eff80;
+  border-color: #038eff80;
+}
+
+.modal-form-button:disabled:focus,
+.modal-form-button:disabled:hover,
+#button-modal-save:disabled:focus,
+#button-modal-save:disabled:hover {
+  background-color: #038eff80;
+  border-color: #053053;
+  color: #053053;
 }

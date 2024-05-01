@@ -1,28 +1,27 @@
-const giftString = localStorage.getItem('gift');
+const giftString = sessionStorage.getItem("gift");
 
 let gift = {
-    id: 0,
-    imgSrc: "./imgs/gift-img.jpg",
-    name: "Not Found",
-    category: "Not Found",
-    price: 0,
-    number: 0,
+  id: 0,
+  img: "./imgs/gift-img.jpg",
+  name: "Not Found",
+  category: "Not Found",
+  price: 0,
+  number: 0,
 };
 
 if (giftString) {
-    gift = JSON.parse(giftString);
+  gift = JSON.parse(giftString);
 }
-
 
 const giftImg = document.querySelector(".gift-img");
 
-const giftName = document.querySelector('.gift-name');
-const giftCategory = document.querySelector('.gift-category');
-const giftPrice = document.querySelector('.gift-price');
+const giftName = document.querySelector(".gift-name");
+const giftCategory = document.querySelector(".gift-category");
+const giftPrice = document.querySelector(".gift-price");
 
-const giftAvailability = document.querySelector('.gift-availability');
+const giftAvailability = document.querySelector(".gift-availability");
 
-giftImg.setAttribute("src", gift.imgSrc);
+giftImg.setAttribute("src", gift.img);
 giftImg.setAttribute("alt", gift.name);
 
 giftName.textContent = gift.name;
@@ -32,15 +31,15 @@ giftPrice.textContent = gift.price + " грн.";
 const giftBasket = document.querySelector(".gift-basket");
 
 if (gift.number > 0) {
-    giftAvailability.textContent = "У наявності";
-    giftAvailability.style.color = "#038cff";
+  giftAvailability.textContent = "У наявності";
+  giftAvailability.style.color = "#038cff";
 
-    giftBasket.disabled = false; // не обов'язково
+  giftBasket.disabled = false; // не обов'язково
 } else {
-    giftAvailability.textContent = "Немає в наявності";
-    giftAvailability.style.color = "#FF0000";
+  giftAvailability.textContent = "Немає в наявності";
+  giftAvailability.style.color = "#FF0000";
 
-    giftBasket.disabled = true;
-    giftBasket.style.backgroundColor = "#CCCCCC";
-    giftBasket.style.borderColor = "#CCCCCC";
+  giftBasket.disabled = true;
+  giftBasket.style.backgroundColor = "#CCCCCC";
+  giftBasket.style.borderColor = "#CCCCCC";
 }
