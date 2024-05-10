@@ -101,11 +101,12 @@
           x
         </button>
         <h3 class="modal-title">
-          На електронну адресу, вказану при реєстрації, прийде число
+          На електронну адресу, вказану при реєстрації, прийде число (чекати до 1 хв)
         </h3>
         <form class="modal-form">
           <input
             type="email"
+            name="email"
             class="modal-field-input"
             id="modal-email"
             placeholder="Введіть електронну пошту"
@@ -119,10 +120,14 @@
 
           <input
             type="text"
+            name="number-confirmation"
             class="modal-field-input"
             id="modal-number-confirmation"
             placeholder="Введіть число"
             minlength="6"
+            maxlength="6"
+            pattern="^\d+$"
+            title="Тільки цифри"
             disabled
             required
           />
@@ -132,6 +137,7 @@
           
           <input
             type="password"
+            name="password"
             class="modal-field-input"
             id="modal-password"
             placeholder="Введіть новий пароль"
@@ -145,6 +151,7 @@
           />
           <input
             type="password"
+            name="password-confirmation"
             class="modal-field-input"
             id="modal-password-confirmation"
             placeholder="Підтвердьте пароль"

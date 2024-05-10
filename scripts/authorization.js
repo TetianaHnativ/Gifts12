@@ -34,42 +34,66 @@ const authorizationCloseButton = document.getElementById(
 const modalFormSubmit = document.querySelector(".modal-form");
 
 const modalEmail = document.getElementById("modal-email");
+const modalNumberConfirmation = document.getElementById(
+  "modal-number-confirmation"
+);
 const modalPassword = document.getElementById("modal-password");
 const modalPasswordConfirmation = document.getElementById(
   "modal-password-confirmation"
 );
-const modalNumberConfirmation = document.getElementById(
-  "modal-number-confirmation"
+
+const buttonModalSend = document.getElementById("button-modal-send");
+const buttonModalConfirmation = document.getElementById(
+  "button-modal-confirmation"
 );
+const buttonModalSave = document.getElementById("button-modal-save");
 
 const messageModalPassword = document.getElementById("message-modal-password");
 
 modalFormSubmit.addEventListener("input", gaps);
-
 modalEmail.addEventListener("blur", function () {
   modalEmail.value = modalEmail.value.trim(); // blur - втрата фокусу елементом
 });
 
 modalFormSubmit.addEventListener("submit", (event) => {
   event.preventDefault();
-  newPassword();
+  if (event.submitter === buttonModalSend) {
+    fetchFunction(sendEmail);
+  }
+  if (event.submitter === buttonModalConfirmation) {
+    fetchFunction(numberChecking);
+  }
+  if (event.submitter === buttonModalSave) {
+    fetchFunction(passwordChecking);
+  }
+});
+
+authorizationCloseButton.addEventListener("click", function () {
+  authorizationModal.style.display = "none";
+  modalFormSubmit.reset();
+  messageModalPassword.textContent = "";
 });
 
 function newPassword() {
   const changePassword = {
     email: modalEmail.value,
+    numberConfirmation: modalNumberConfirmation.value,
     password: modalPassword.value,
-    //passwordConfirmation: modalPasswordConfirmation.value,
-    //numberConfirmation: modalNumberConfirmation.value,
+    passwordConfirmation: modalPasswordConfirmation.value,
+    action: "",
   };
+  return changePassword;
+}
 
-  // Відправлення даних на сервер
+function fetchFunction(myFunction) {
+  const formData = newPassword();
+  formData.action = myFunction.name;
   fetch("./phpDatabase/forgotPasswordDatabase.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams(changePassword).toString(), // Кодуємо дані форми
+    body: new URLSearchParams(formData).toString(), // Кодуємо дані форми
   })
     .then((response) => {
       if (!response.ok) {
@@ -78,28 +102,63 @@ function newPassword() {
       return response.text();
     })
     .then((data) => {
-      if (data.trim() === "email isn't registered") {
-        messageModalPassword.textContent = "Електронна пошта неправильна!";
-      } else if (data.trim() !== "wrong") {
-        messageModalPassword.textContent = "Пароль неправильний!";
-        console.log(data.trim());
-      } else if (data.trim() === "successful") {
-        messageModalPassword.textContent = "";
-        ModalMessage("Ваш пароль оновлено!");
-      }
+      myFunction(data);
+      //console.log(data); - перевірка
     })
     .catch((error) => {
       console.error("error: ", error);
     });
 }
 
-authorizationCloseButton.addEventListener("click", function () {
-  authorizationModal.style.display = "none";
-  modalFormSubmit.reset();
-  messageModalPassword.textContent = "";
-});
+function sendEmail(data) {
+  if (data.trim() === "wrong email") {
+    messageModalPassword.textContent = "Електронна пошта неправильна!";
+
+    modalNumberDisabled(true);
+    modalPasswordDisabled(true);
+  } else {
+    messageModalPassword.textContent = "";
+    modalNumberDisabled(false);
+  }
+}
+
+function numberChecking(data) {
+  if (data.trim() === "only email is right") {
+    messageModalPassword.textContent = "Неправильне число!";
+    modalPasswordDisabled(true);
+  } else {
+    messageModalPassword.textContent = "";
+    modalPasswordDisabled(false);
+  }
+}
+
+function passwordChecking(data) {
+  if (data.trim() === "passwords wrong") {
+    messageModalPassword.textContent = "Паролі не збігаються!";
+  } else if (data.trim() === "successful") {
+    messageModalPassword.textContent = "";
+    ModalMessage("Ваш пароль оновлено!");
+  }
+}
+
+function modalNumberDisabled(value) {
+  modalNumberConfirmation.disabled = value;
+  buttonModalConfirmation.disabled = value;
+  if (value === true) modalNumberConfirmation.value = "";
+}
+
+function modalPasswordDisabled(value) {
+  modalPassword.disabled = value;
+  modalPasswordConfirmation.disabled = value;
+  buttonModalSave.disabled = value;
+  if (value === true) {
+    modalPassword.value = "";
+    modalPasswordConfirmation.value = "";
+  }
+}
 
 ///////////////////////////////////////////////////
+
 form.addEventListener("input", gaps);
 
 window.addEventListener("beforeunload", function () {
@@ -121,7 +180,6 @@ function verification() {
     password: password.value,
   };
 
-  // Відправлення даних на сервер
   fetch("./phpDatabase/authorizationDatabase.php", {
     method: "POST",
     headers: {
