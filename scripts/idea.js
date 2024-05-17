@@ -1,4 +1,4 @@
-const ideaString = localStorage.getItem('idea');
+const ideaString = sessionStorage.getItem('idea');
 
 let idea = {
     id: 0,
@@ -25,14 +25,16 @@ const ideaDescription = document.querySelector('.idea-description-list');
 const ideaPhone = document.querySelector('.idea-phone');
 
 
-ideaImg.setAttribute("src", idea.imgSrc);
+ideaImg.setAttribute("src", idea.img);
 ideaImg.setAttribute("alt", idea.name);
 
 ideaName.textContent = idea.name;
-ideaAuthor.textContent = idea.author;
+ideaAuthor.textContent = `${idea.surname} ${idea.username}`;
 ideaPrice.textContent = idea.price > 0 ? idea.price + " грн." : "Безкоштовно";
 
-idea.description.forEach(element => {
+const description = idea.description.split("\n");
+
+description.forEach(element => {
     const li = document.createElement('li');
     li.classList.add("idea-description-item");
     li.textContent = element;

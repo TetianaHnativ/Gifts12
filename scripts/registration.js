@@ -1,6 +1,6 @@
 // Поля для вводу
 const surname = document.getElementById("surname");
-const name = document.getElementById("name");
+const username = document.getElementById("name");
 const phone = document.getElementById("phone");
 const email = document.getElementById("login");
 const password = document.getElementById("password");
@@ -55,7 +55,7 @@ form.addEventListener("submit", function (event) {
 async function saveUserData() {
   let userData = {
     surname: surname.value,
-    name: name.value,
+    username: username.value,
     phone: phone.value,
     email: email.value,
     password: password,

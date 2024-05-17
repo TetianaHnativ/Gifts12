@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "secret";
 $dbname = "gifts";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 
 $surname = $_POST['surname'];
-$name = $_POST['name'];
+$name = $_POST['username'];
 $phone = $_POST['phone'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -26,7 +26,7 @@ if ($result_check_email->num_rows > 0) {
 } else {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (surname, name, phone, email, password) VALUES ('$surname', '$name', '$phone', '$email', '$hashed_password')";
+    $sql = "INSERT INTO users (surname, username, phone, email, password) VALUES ('$surname', '$name', '$phone', '$email', '$hashed_password')";
     if ($conn->query($sql) === TRUE) {
         echo "success";
     } else {

@@ -1,239 +1,231 @@
-const ideas = [
-    {
-        id: 1,
-        imgSrc: "./imgs/makaron-idea.jpg",
-        name: "Макаруни",
-        author: "Julia Divuk",
-        price: 180,
-        phone: "+380667833456",
-        description: ["jhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdh", "ndsivnsdivjhcjsdhjhcjsdh", "njdvkdsnvkdsfjhcjsdhn", "jvnvjfdnvjfdn", "jhcjhcjsdhjhcjsdhjhcjsdhjhcjsdhjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
-    },
-    {
-        id: 2,
-        imgSrc: "./imgs/candles-idea.jpg",
-        name: "Свічки",
-        author: "Anna Ravna",
-        price: 100,
-        phone: "+380667833456",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
-    },
-    {
-        id: 3,
-        imgSrc: "./imgs/soap-idea.jpg",
-        name: "Мило",
-        author: "Maria Naum",
-        price: 0,
-        phone: "+380667833456",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
-    },
-    {
-        id: 4,
-        imgSrc: "./imgs/toys-idea.jpg",
-        name: "М'які іграшки",
-        author: "Tetiana Hnativ",
-        price: 200,
-        phone: "+380503388467",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv"],
-    },
-    {
-        id: 5,
-        imgSrc: "./imgs/makaron-idea.jpg",
-        name: "Макаруни",
-        author: "Julia Divuk",
-        price: 0,
-        phone: "",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh"],
-    },
-    {
-        id: 6,
-        imgSrc: "./imgs/candles-idea.jpg",
-        name: "Свічки",
-        author: "Anna Ravna",
-        price: 100,
-        phone: "+380667833456",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn"],
-    },
-    {
-        id: 7,
-        imgSrc: "./imgs/soap-idea.jpg",
-        name: "Мило",
-        author: "Maria Naum",
-        price: 150,
-        phone: "+380503388467",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
-    },
-    {
-        id: 8,
-        imgSrc: "./imgs/toys-idea.jpg",
-        name: "М'які іграшки",
-        author: "Tetiana Hnativ",
-        price: 0,
-        phone: "",
-        description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn", "jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
-    },
-]
+let ideas = [];
+
+let user = 0;
+
+user = parseInt(localStorage.getItem("user"));
+
+function gaps(inputElement) {
+  if (inputElement.value.includes(" ")) {
+    inputElement.value = inputElement.value.replace(/\s/g, "");
+  }
+}
 
 const ideasList = document.querySelector(".ideas-list");
-
-ideas.forEach(element => {
-    const li = document.createElement('li');
-    li.classList.add("ideas-list-item");
-    li.setAttribute("data-id", element.id);
-    li.innerHTML = `<a href="./idea.html"
-    ><img
-      src=${element.imgSrc}
-      alt=${element.name}
-      class="idea-img"
-  />
-  <h3 class="idea-name">${element.name}</h3>
-  <p class="idea-author">${element.author}</p>
-  <p class="idea-price">${element.price ? element.price + " грн." : "Безкоштовно"} </p></a>`
-    ideasList.append(li);
-});
-
-const ideasListItem = document.querySelectorAll('.ideas-list-item');
-
-ideasList.addEventListener('click', (evt) => {
-    const ideasListItem = evt.target.closest('.ideas-list-item');
-    const ideaId = ideasListItem.getAttribute('data-id');
-
-    const idea = ideas.find(element => element.id === Number(ideaId));
-    const ideaString = JSON.stringify(idea);
-    localStorage.setItem('idea', ideaString);
-})
 
 // Валідація імпута пошуку
 const searchInput = document.querySelector(".search");
 
-function removeSpaces() {
-    searchInput.value = searchInput.value.trim().replace(/\s+/g, ' ');
+function removeSpaces(inputElement) {
+  inputElement.value = inputElement.value.trim().replace(/\s+/g, " ");
 }
 
 window.addEventListener("pageshow", function () {
-    searchInput.value = "";
+  searchInput.value = "";
 });
 
-//Пошук товару по назві
-const searchButton = document.querySelector('.search-button');
-searchButton.addEventListener('click', () => {
-    searchIdea();
-})
+fetch("./phpDatabase/ideasDatabase.php")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    ideas = data;
 
-function searchIdea() {
-    const search = searchInput.value.toLowerCase();
-    ideasListItem.forEach((idea) => {
-        const ideaName = idea.querySelector('.idea-name').textContent.toLowerCase();
-        if (ideaName.includes(search)) {
-            idea.style.display = "flex";
-        } else {
-            idea.style.display = "none";
-        }
+    ideas.forEach((element) => {
+      const li = document.createElement("li");
+      li.classList.add("ideas-list-item");
+      li.setAttribute("data-id", element.id);
+      li.innerHTML = `<a href="./idea.html"
+    ><img
+      src=${element.img}
+      alt=${element.name}
+      class="idea-img"
+  />
+  <h3 class="idea-name">${element.name}</h3>
+  <p class="idea-author">${element.surname} ${element.username}</p>
+  <p class="idea-price">${
+    element.price ? element.price + " грн." : "Безкоштовно"
+  } </p></a>`;
+      ideasList.append(li);
     });
-}
 
-//Cортування за ціною
-const sortList = document.querySelector(".sort-list");
+    const ideasListItem = document.querySelectorAll(".ideas-list-item");
 
-sortList.addEventListener('change', () => {
-    sortItems();
-})
+    ideasList.addEventListener("click", (evt) => {
+      const ideasListItem = evt.target.closest(".ideas-list-item");
+      const ideaId = ideasListItem.getAttribute("data-id");
 
-function sortItems() {
-    const sortValue = sortList.value;
-    const ideasArray = Array.from(ideasListItem);
+      const idea = ideas.find((element) => element.id === ideaId);
+      sessionStorage.setItem("idea", JSON.stringify(idea));
+    });
 
-    function sortByPrice() {
-        ideasArray.sort(function (a, b) {
-            let priceA = parseInt(
-                a.getElementsByClassName("idea-price")[0].innerText
-            ) ? parseInt(
-                a.getElementsByClassName("idea-price")[0].innerText
-            ) : 0;
-            let priceB = parseInt(
-                b.getElementsByClassName("idea-price")[0].innerText
-            ) ? parseInt(
-                b.getElementsByClassName("idea-price")[0].innerText
-            ) : 0;
-            return priceA - priceB;
-        });
+    //Пошук товару по назві
+    const searchButton = document.querySelector(".search-button");
+    searchButton.addEventListener("click", () => {
+      searchIdea();
+    });
+
+    function searchIdea() {
+      const search = searchInput.value.toLowerCase();
+      ideasListItem.forEach((idea) => {
+        const ideaName = idea
+          .querySelector(".idea-name")
+          .textContent.toLowerCase();
+        if (ideaName.includes(search)) {
+          idea.style.display = "flex";
+        } else {
+          idea.style.display = "none";
+        }
+      });
     }
 
-    if (sortValue === "cheap") {
+    //Cортування за ціною
+    const sortList = document.querySelector(".sort-list");
+
+    sortList.addEventListener("change", () => {
+      sortItems();
+    });
+
+    function sortItems() {
+      const sortValue = sortList.value;
+      const ideasArray = Array.from(ideasListItem);
+
+      function sortByPrice() {
+        ideasArray.sort(function (a, b) {
+          let priceA = parseInt(
+            a.getElementsByClassName("idea-price")[0].innerText
+          )
+            ? parseInt(a.getElementsByClassName("idea-price")[0].innerText)
+            : 0;
+          let priceB = parseInt(
+            b.getElementsByClassName("idea-price")[0].innerText
+          )
+            ? parseInt(b.getElementsByClassName("idea-price")[0].innerText)
+            : 0;
+          return priceA - priceB;
+        });
+      }
+
+      if (sortValue === "cheap") {
         sortByPrice(); // Сортування від дешевих до дорогих
-    } else if (sortValue === "expensive") {
+      } else if (sortValue === "expensive") {
         sortByPrice();
         ideasArray.reverse(); // Зворотнє сортування, оскільки відбувається від дорогих до дешевих
-    }
+      }
 
-    ideasList.innerHTML = '';
-    ideasArray.forEach(function (item) {
+      ideasList.innerHTML = "";
+      ideasArray.forEach(function (item) {
         ideasList.appendChild(item);
-    });
-}
+      });
+    }
+  })
+  .catch((error) => {
+    console.error("There has been a problem with your fetch operation:", error);
+  });
 
-//Модальне вікно
-const modalContainer = document.querySelector(".modal-container");
+//Модальне вікно-повідомлення
+const messageModal = document.getElementById("message-modal");
 
-const openModal = () => {
-    modalContainer.style.display = "flex";
+const modalTitleMessage = document.getElementById("modal-title-message");
+
+const messageCloseModal = document.getElementById("close-modal-message");
+messageCloseModal.addEventListener("click", () => closeModal(messageModal));
+
+//Модальне вікно додавання ідеї
+const addIdeaModal = document.getElementById("add-idea-modal");
+
+const addIdeaButton = document.getElementById("add-idea");
+const closeModalIdea = document.getElementById("close-modal-idea");
+
+addIdeaButton.addEventListener("click", () => {
+  if (user > 0) {
+    openModal(addIdeaModal);
+  } else {
+    openModal(messageModal);
+    modalTitleMessage.textContent =
+      "Для додавання ідеї авторизуйтеся в системі!";
+  }
+});
+
+closeModalIdea.addEventListener("click", () => closeModal(addIdeaModal));
+
+const openModal = (modal) => {
+  modal.style.display = "flex";
 };
 
-const closeModal = () => {
-    modalContainer.style.display = "none";
+const closeModal = (modal) => {
+  modal.style.display = "none";
 };
 
-const ideaForm = document.getElementById('idea-form');
+const ideaForm = document.getElementById("idea-form");
 
 let newIdea = {
-    id: 100,
-    imgSrc: "",
-    name: "",
-    author: "",
-    price: "",
-    phone: "",
-    description: "",
-}
+  img: "",
+  name: "",
+  author: user,
+  price: "",
+  phone: "",
+  description: "",
+};
 
-let picture = "";
+let picture = "./imgs/idea-img.jpg";
 let name = "";
-let author = "";
 let price = "";
 let phone = "";
 let description = "";
 
 ideaForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const id = 100;
-    picture = document.getElementById("file-download").files[0];
-    name = document.getElementById("name").value;
-    author = "Tetiana Hnativ";
-    price = document.getElementById("price").value;
-    phone = document.getElementById("phone").value;
-    description = document.getElementById("description").value;
+  picture = document.getElementById("file-download").files[0];
+  name = document.getElementById("name").value;
+  price = document.getElementById("price").value;
+  phone = document.getElementById("phone").value;
+  description = document.getElementById("description").value;
 
-    newIdea = {
-        id: id,
-        imgSrc: picture,
-        name: name,
-        author: author,
-        price: price,
-        phone: phone,
-        description: description,
-    }
+  newIdea = {
+    img: picture || "./imgs/idea-img.jpg",
+    name: name,
+    author: user,
+    price: parseFloat(price) || "",
+    phone: phone,
+    description: description,
+  };
 
-    localStorage.setItem("newIdea", JSON.stringify(newIdea));
+  console.log(newIdea);
 
-    let addIdea = JSON.parse(localStorage.getItem("newIdea"));
+  fetch("./phpDatabase/addIdeaDatabase.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(newIdea).toString(), // Кодуємо дані форми
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("status code:" + response.status);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      console.error(data);
+      if (data.trim() === "success") {
+        addIdeaModal.style.display = "none";
+        setTimeout(function () {
+          messageModal.style.display = "flex";
+          modalTitleMessage.textContent = "Вашу ідею додано!";
+        }, 0);
 
-    if (addIdea) {
-        if (addIdea.description) {
-            addIdea.description = addIdea.description.split("\n");
-        }
-        ideas.push(addIdea);
-    }
-
-    console.log(ideas);
+        setTimeout(function () {
+          messageModal.style.display = "none";
+          ideaForm.reset();
+          ideaForm.submit(); // Відправляємо форму
+        }, 4000);
+      }
+    })
+    .catch((error) => {
+      console.error("error: ", error);
+    });
 });
-
-
