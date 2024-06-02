@@ -165,21 +165,21 @@ let newIdea = {
   img: "",
   name: "",
   author: user,
-  price: "",
+  price: 0,
   phone: "",
   description: "",
 };
 
 let picture = "./imgs/idea-img.jpg";
 let name = "";
-let price = "";
+let price = 0;
 let phone = "";
 let description = "";
 
 ideaForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  picture = document.getElementById("file-download").files[0];
+  picture = document.getElementById("imageUrl").value;
   name = document.getElementById("name").value;
   price = document.getElementById("price").value;
   phone = document.getElementById("phone").value;
@@ -189,19 +189,19 @@ ideaForm.addEventListener("submit", (e) => {
     img: picture || "./imgs/idea-img.jpg",
     name: name,
     author: user,
-    price: parseFloat(price) || "",
+    price: parseFloat(price) || 0,
     phone: phone,
     description: description,
   };
 
-  console.log(newIdea);
+  //console.log(newIdea); - перевірка
 
   fetch("./phpDatabase/addIdeaDatabase.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams(newIdea).toString(), // Кодуємо дані форми
+    body: new URLSearchParams(newIdea).toString(),
   })
     .then((response) => {
       if (!response.ok) {

@@ -197,11 +197,6 @@ main {
 .img-button:focus {
     background-color: #ffbc03;
 }
-
-#file-download {
-    display: none;
-}
-
 .custom-button-label {
     cursor: pointer;
 }

@@ -21,7 +21,8 @@ $sql_check = "SELECT * FROM users WHERE id=$author";
 $result_check = $conn->query($sql_check);
 
 if ($result_check->num_rows > 0) {
-    $sql = "INSERT INTO ideas (img, name, price, phone, description, user) VALUES ('$img', '$name', $price, '$phone', '$description', $author)";
+    $sql = "INSERT INTO ideas (img, name, price, phone, description, user) 
+    VALUES ('$img', '$name', $price, '$phone', '$description', $author)";
     if ($conn->query($sql) === TRUE) {
         echo "success";
     } else {

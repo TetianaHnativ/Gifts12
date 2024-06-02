@@ -4,6 +4,7 @@ $username = "root";
 $password = "secret";
 $dbname = "gifts";
 
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -21,10 +22,9 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     if ($row["blocking"]) {
         echo "blocking";
-    } else if (password_verify($password, $row["password"])) {
+    } else if (hash('sha256', $password) === $row["password"]) {
         $user_id = $row['id'];
         echo "login successful,$user_id";
-        //$sql_update = "UPDATE users SET log_in = 1 WHERE id = $user_id"; $conn->query($sql_update);
     } else {
         echo "wrong";
     }

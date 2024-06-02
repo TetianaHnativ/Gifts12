@@ -24,9 +24,10 @@ $result_check_email = $conn->query($sql_check_email);
 if ($result_check_email->num_rows > 0) {
     echo "email is already registered";
 } else {
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $hashed_password = hash('sha256', $password);
 
-    $sql = "INSERT INTO users (surname, username, phone, email, password) VALUES ('$surname', '$name', '$phone', '$email', '$hashed_password')";
+    $sql = "INSERT INTO users (surname, username, phone, email, password) 
+    VALUES ('$surname', '$name', '$phone', '$email', '$hashed_password')";
     if ($conn->query($sql) === TRUE) {
         echo "success";
     } else {

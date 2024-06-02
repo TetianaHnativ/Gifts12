@@ -62,7 +62,7 @@ if ($result->num_rows > 0) {
 
     if ($action === 'passwordChecking') {
         if ($password && $passwordConfirmation && $passwordConfirmation === $password) {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $hashed_password = hash('sha256', $password);
 
             $update_sql = "UPDATE users SET password='$hashed_password' WHERE email='$email'";
             if ($conn->query($update_sql) === TRUE) {

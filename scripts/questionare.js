@@ -24,18 +24,18 @@ questionnaireButton.addEventListener("click", (evt) => {
   fetch("./phpDatabase/questionnaireDatabase.php", {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded", // Встановлюємо правильний заголовок
+      "Content-Type": "application/x-www-form-urlencoded", 
     },
-    body: new URLSearchParams(questionnaire).toString(), // Кодуємо дані форми
+    body: new URLSearchParams(questionnaire).toString(),
   })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return response.text(); // Повертаємо текст відповіді сервера
+      return response.text(); 
     })
     .then((data) => {
-      console.log(data); // Друкуємо отриману відповідь в консоль
+      console.log(data); 
     })
     .catch((error) => {
       console.error(

@@ -185,7 +185,7 @@ function verification() {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams(user).toString(), // Кодуємо дані форми
+    body: new URLSearchParams(user).toString(), 
   })
     .then((response) => {
       if (!response.ok) {

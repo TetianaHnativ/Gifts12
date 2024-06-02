@@ -10,10 +10,13 @@ const passwordConfirmation = document.getElementById("password-confirmation");
 const messageModal = document.getElementById("message-modal");
 const modalCloseButton = document.querySelector(".modal-close-button");
 
-modalCloseButton.addEventListener("click", function () {
-  messageModal.style.display = "none";
-  form.submit();
-});
+// Перевірка, що modalCloseButton не є нульовим
+if (modalCloseButton) {
+  modalCloseButton.addEventListener("click", function () {
+      messageModal.style.display = "none";
+      form.submit();
+  });
+}
 
 //Інші елементи форми
 const registerButton = document.querySelector(".registration-button");
@@ -26,30 +29,39 @@ function gaps(event) {
   }
 }
 
-form.addEventListener("input", gaps);
+if (form) {
+  form.addEventListener("input", gaps);
+}
 
-email.addEventListener("blur", function () {
-  email.value = email.value.trim(); // blur - втрата фокусу елементом
-});
+if (email) {
+  email.addEventListener("blur", function () {
+      email.value = email.value.trim(); // blur - втрата фокусу елементом
+  });
+}
+
 
 window.addEventListener("beforeunload", function () {
   form.reset(); // Очищаємо всі поля форми
 });
 
-form.addEventListener("submit", function (event) {
-  try {
-    event.preventDefault(); // Зупиняємо відправку форми
-    if (password.value !== passwordConfirmation.value) {
-      message.textContent = "Паролі не збігаються!";
-    } else {
-      message.textContent = "";
 
-      saveUserData();
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
+if (form) {
+  form.addEventListener("submit", function (event) {
+      try {
+          event.preventDefault(); // Зупиняємо відправку форми
+          if (password.value !== passwordConfirmation.value) {
+              message.textContent = "Паролі не збігаються!";
+          } else {
+              message.textContent = "";
+
+              saveUserData();
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  });
+}
+
 
 
 async function saveUserData() {

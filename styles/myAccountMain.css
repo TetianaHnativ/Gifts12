@@ -129,6 +129,13 @@ section {
 }
 
 /*section id="basket-gifts"*/
+#basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .basket-main-title {
   color: #038cff;
   text-shadow: -1px -1px 0 #053053, 1px -1px 0 #053053, -1px 1px 0 #053053,
@@ -154,6 +161,21 @@ section {
 .basket-delete {
   border: 1px solid #ffbc03;
   background-color: #fff;
+}
+
+.my-account-button {
+  margin-top: 30px;
+  background-color: #053053;
+  border-color: #053053;
+  color: #fff;
+  font-size: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.my-account-button:focus,
+.my-account-button:hover {
+  background-color: #038cff;
 }
 
 /*section id="my-data"*/
@@ -299,6 +321,7 @@ section {
 #my-ideas {
   background-color: #038cff;
 }
+
 .my-ideas-title {
   color: #ffbc03;
   text-shadow: -1px -1px 0 #038cff, 1px -1px 0 #038cff, -1px 1px 0 #038cff,
@@ -332,6 +355,7 @@ section {
 #favourites-ideas {
   background-color: #ebed4d;
 }
+
 .favourites-ideas-title {
   color: #038cff;
   text-shadow: -1px -1px 0 #ebed4d, 1px -1px 0 #ebed4d, -1px 1px 0 #ebed4d,
@@ -423,5 +447,9 @@ section {
 
   .modal-form-button {
     font-size: 15px;
+  }
+
+  .my-account-button {
+    font-size: 25px;
   }
 }

@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "secret";
 $dbname = "gifts";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,9 +16,7 @@ $result = $conn->query($sql);
 $data_array = array();
 
 if ($result->num_rows > 0) {
-    // Вибірка даних рядок за рядком
-    while($row = $result->fetch_assoc()) {
-        // Додавання рядка у масив
+    while ($row = $result->fetch_assoc()) {
         $data_array[] = $row;
     }
 } else {
@@ -27,6 +25,4 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// Передача масиву у ваш скрипт
 echo json_encode($data_array);
-?>
