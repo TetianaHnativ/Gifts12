@@ -10,8 +10,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM gifts";
-$result = $conn->query($sql);
+$user = $_POST['id'];
+
+$result = $conn->query("SELECT surname, username, email, phone FROM users WHERE id = $user");
 
 $data_array = array();
 
@@ -20,7 +21,7 @@ if ($result->num_rows > 0) {
         $data_array[] = $row;
     }
 } else {
-    echo "No records found";
+    echo json_encode("No records found");
 }
 
 $conn->close();

@@ -1,4 +1,4 @@
-//header
+//-------------------------------------------------------------------------------------------------header-------------------------------------------------------------------------------------------------
 const menu = document.getElementById("menu");
 const header = document.querySelector("header");
 menu.addEventListener("click", (evt) => {
@@ -11,29 +11,56 @@ window.addEventListener("scroll", () => {
   header.classList.remove("toggle");
 });
 
-//data
+window.addEventListener("beforeunload", function () {
+  PasswordFields(true, "")
 
-let gifts = JSON.parse(localStorage.getItem('basket')) || [];
-let shop = JSON.parse(localStorage.getItem('favouritesGifts')) || [];
+  form.submit();
+});
 
-async function myAccountDataBase(server, selectedList) {
+const userTitle = document.querySelector(".user-title");
+
+//-------------------------------------------------------------------------------------------------data-------------------------------------------------------------------------------------------------
+let userData = {
+  id: 0,
+  username: "",
+  surname: "",
+  email: "",
+  phone: "",
+  oldPassword: "",
+  newPassword: "",
+  passwordConfirmation: "",
+};
+
+userData.id = JSON.parse(localStorage.getItem('user'));
+
+async function myAccountDataBase(server) {
   try {
-    const response = await fetch(`./phpDatabase/${server}.php`);
+    const response = await fetch(`./myAccountDatabase/${server}.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(userData).toString(),
+    });
     if (!response.ok) {
       throw new Error("status code: " + response.status);
     }
     const data = await response.json();
-    return data.filter(obj => selectedList.includes(obj.id));
+    return data;
   } catch (error) {
     console.error("error:", error);
-    return [];
+    return error;
   }
 }
 
+//-------------------------------------------------------------------------------------------------section id="favourites-gifts"-------------------------------------------------------------------------------------------------
+
+let gifts = [];
+let basket = [];
+
 async function updateLists() {
-  gifts = await myAccountDataBase("shopDatabase", gifts);
-  shop = await myAccountDataBase("shopDatabase", shop);
-  //section id="favourites-gifts"
+  gifts = await myAccountDataBase("shopDatabase");
+  basket = await myAccountDataBase("shopDatabase");
   const favouritesGifts = document.getElementById("favourites-gifts-list"); // сам список
 
   gifts.forEach((element) => {
@@ -69,10 +96,10 @@ async function updateLists() {
   });
 
 
-  //section id="basket-gifts"
+  //-------------------------------------------------------------------------------------------------section id="basket-gifts"-------------------------------------------------------------------------------------------------
   const basketGifts = document.getElementById("basket-gifts-list"); // сам список
 
-  shop.forEach((element) => {
+  basket.forEach((element) => {
     const li = document.createElement("li");
     li.classList.add("basket-gifts-item");
     li.setAttribute("data-id", element.id);
@@ -105,7 +132,7 @@ async function updateLists() {
   });
 }
 
-updateLists();
+//updateLists();
 
 const ideas = [
   {
@@ -273,17 +300,19 @@ const ownIdeas = [
 ];
 
 
-//section id="my-data"
+//-------------------------------------------------------------------------------------------------section id="my-data"-------------------------------------------------------------------------------------------------
 const dataForm = document.querySelector(".my-data-form");
 
 const surname = document.getElementById("surname");
-const name = document.getElementById("name");
+const username = document.getElementById("name");
 const phone = document.getElementById("phone");
 const email = document.getElementById("login");
 const oldPassword = document.getElementById("old-password");
 const newPassword = document.getElementById("new-password");
+const passwordConfirmation = document.getElementById("new-password-confirmation");
 
 const confirmPasswordButton = document.querySelector(".confirm-button");
+const submitButton = document.querySelector(".submit-button");
 
 function gaps(event) {
   if (event.target.value.includes(" ")) {
@@ -297,17 +326,100 @@ email.addEventListener("blur", function () {
   email.value = email.value.trim(); // blur - втрата фокусу елементом
 });
 
-let userData = JSON.parse(localStorage.getItem("user"));
-
 if (userData) {
-  surname.value = userData.surname;
-  name.value = userData.name;
-  phone.value = userData.phone;
-  email.value = userData.email;
+  async function myData() {
+    try {
+      const data = await myAccountDataBase("myDataDatabase");
+      // console.log(data);
+      userTitle.textContent = data[0].surname + " " + data[0].username;
+
+      surname.value = data[0].surname;
+      username.value = data[0].username;
+      phone.value = data[0].phone;
+      email.value = data[0].email;
+
+      userData.surname = data[0].surname;
+      userData.username = data[0].username;
+      userData.phone = data[0].phone;
+      userData.email = data[0].email;
+    } catch (error) {
+      console.error("error:", error);
+    }
+  }
+
+  async function myPassword() {
+    try {
+      const data = await myAccountDataBase("savePasswordDatabase");
+      //console.log(data);
+      return data;
+    } catch (error) {
+      console.error("error:", error);
+    }
+  }
+
+  async function saveData() {
+    try {
+      const data = await myAccountDataBase("saveDataDatabase");
+      //console.log(data);
+      return data;
+    } catch (error) {
+      console.error("error:", error);
+    }
+  }
+
+  myData();
+
+  confirmPasswordButton.addEventListener("click", async function () {
+    if (oldPassword.value) {
+      userData.oldPassword = oldPassword.value;
+      if (await myPassword() === "password right") {
+        PasswordFields(false, "");
+      } else {
+        PasswordFields(true, "Старий пароль неправильний!");
+        newPassword.value = "";
+        passwordConfirmation.value = "";
+      }
+    } else {
+      PasswordFields(true, "");
+      newPassword.value = "";
+      passwordConfirmation.value = "";
+    }
+  })
+
+  dataForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    if (newPassword.value && passwordConfirmation.value && newPassword.value !== passwordConfirmation.value) {
+      message.textContent = "Нові паролі не збігаються!";
+    } else {
+      message.textContent = "";
+
+      userData.surname = surname.value;
+      userData.username = username.value;
+      userData.phone = phone.value;
+      userData.email = email.value;
+      userData.newPassword = newPassword.value;
+
+      if (await saveData() === "success") {
+        ModalMessage("Ваші дані оновлено!");
+      }
+    }
+
+  })
 }
 
+function PasswordFields(value, mess) {
+  message.textContent = mess;
 
-// Модальне вікно
+  newPassword.disabled = value;
+  passwordConfirmation.disabled = value;
+
+  newPassword.required = !value;
+  passwordConfirmation.required = !value;
+  newPassword.required = !value;
+  passwordConfirmation.required = !value;
+}
+
+//-------------------------------------------------------------------------------------------------Модальне вікно-------------------------------------------------------------------------------------------------
 const messageModal = document.getElementById("message-modal");
 const messageCloseButton = document.getElementById("message-close-button");
 const messageTitle = document.getElementById("message-title");
@@ -316,53 +428,8 @@ const message = document.querySelector(".message");
 
 messageCloseButton.addEventListener("click", function () {
   messageModal.style.display = "none";
-  dataForm.submit(); // Відправляємо форму
+  dataForm.submit();
 });
-
-confirmPasswordButton.addEventListener("click", async function () {
-  if (oldPassword.value) {
-    try {
-      const oldPasswordHash = await hashedPassword(oldPassword.value);
-      if (oldPasswordHash === userData.password) {
-        message.textContent = "";
-        newPassword.disabled = false;
-      } else {
-        message.textContent = "Старий пароль неправильний!";
-        newPassword.disabled = true;
-        newPassword.value = "";
-      }
-    } catch (error) {
-      console.error("Помилка при обчисленні хешу старого пароля:", error);
-    }
-  } else {
-    newPassword.disabled = true;
-    newPassword.value = "";
-    message.textContent = "";
-  }
-  //WebStudio2003
-});
-
-dataForm.addEventListener("submit", async function (event) {
-  event.preventDefault();
-  messageModal.style.display = "flex";
-  userData.surname = surname.value;
-  userData.name = name.value;
-  userData.phone = phone.value;
-  userData.email = email.value;
-  if (newPassword.value) {
-    userData.password = await hashedPassword(newPassword.value);
-  }
-  localStorage.setItem("user", JSON.stringify(userData));
-  newPassword.value = "";
-  oldPassword.value = "";
-  newPassword.disabled = true;
-  ModalMessage("Дані збережено!");
-});
-
-async function hashedPassword(value) {
-  const hashedPassword = sha256(value);
-  return hashedPassword;
-}
 
 function ModalMessage(title) {
   setTimeout(function () {
@@ -376,8 +443,7 @@ function ModalMessage(title) {
   }, 4000);
 }
 
-
-//section id="my-ideas"
+//-------------------------------------------------------------------------------------------------section id="my-ideas"-------------------------------------------------------------------------------------------------
 const myIdeas = document.getElementById("my-ideas-list"); // сам список
 
 ownIdeas.forEach((element) => {
@@ -386,6 +452,7 @@ ownIdeas.forEach((element) => {
   li.setAttribute("data-id", element.id);
   li.innerHTML = `
   <button class="delete-button my-ideas-delete">x</button>
+  <button class="edit-button my-ideas-edit"><i class="fas fa-pen"></i></button>
   <a class="idea-link" href="./idea.html">
     <img
     src=${element.img}
@@ -415,7 +482,7 @@ myIdeas.addEventListener("click", (evt) => {
 });
 
 
-//section id="favourites-ideas"
+//-------------------------------------------------------------------------------------------------section id="favourites-ideas"-------------------------------------------------------------------------------------------------
 const favouritesIdeas = document.getElementById("favourites-ideas-list"); // сам список
 
 ideas.forEach((element) => {

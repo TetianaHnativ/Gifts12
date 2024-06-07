@@ -1,4 +1,5 @@
-// Поля для вводу
+import { gaps } from "./functions.js";
+
 const surname = document.getElementById("surname");
 const username = document.getElementById("name");
 const phone = document.getElementById("phone");
@@ -13,8 +14,8 @@ const modalCloseButton = document.querySelector(".modal-close-button");
 // Перевірка, що modalCloseButton не є нульовим
 if (modalCloseButton) {
   modalCloseButton.addEventListener("click", function () {
-      messageModal.style.display = "none";
-      form.submit();
+    messageModal.style.display = "none";
+    form.submit();
   });
 }
 
@@ -23,19 +24,13 @@ const registerButton = document.querySelector(".registration-button");
 const message = document.querySelector(".message");
 const form = document.querySelector(".registration");
 
-function gaps(event) {
-  if (event.target.value.includes(" ")) {
-    event.target.value = event.target.value.replace(/\s/g, "");
-  }
-}
-
 if (form) {
   form.addEventListener("input", gaps);
 }
 
 if (email) {
   email.addEventListener("blur", function () {
-      email.value = email.value.trim(); // blur - втрата фокусу елементом
+    email.value = email.value.trim(); // blur - втрата фокусу елементом
   });
 }
 
@@ -47,18 +42,18 @@ window.addEventListener("beforeunload", function () {
 
 if (form) {
   form.addEventListener("submit", function (event) {
-      try {
-          event.preventDefault(); // Зупиняємо відправку форми
-          if (password.value !== passwordConfirmation.value) {
-              message.textContent = "Паролі не збігаються!";
-          } else {
-              message.textContent = "";
+    try {
+      event.preventDefault(); // Зупиняємо відправку форми
+      if (password.value !== passwordConfirmation.value) {
+        message.textContent = "Паролі не збігаються!";
+      } else {
+        message.textContent = "";
 
-              saveUserData();
-          }
-      } catch (error) {
-          console.error(error);
+        saveUserData();
       }
+    } catch (error) {
+      console.error(error);
+    }
   });
 }
 

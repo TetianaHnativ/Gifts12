@@ -1,3 +1,5 @@
+import { gaps } from "../scripts/functions.js";
+
 const messageAuthorization = document.getElementById("message-authorization");
 const form = document.querySelector(".authorization");
 const passwordLink = document.querySelector(".password-link");
@@ -5,11 +7,6 @@ const passwordLink = document.querySelector(".password-link");
 const login = document.getElementById("login");
 const password = document.getElementById("password");
 
-function gaps(event) {
-  if (event.target.value.includes(" ")) {
-    event.target.value = event.target.value.replace(/\s/g, "");
-  }
-}
 
 // Модальне вікно
 const messageModal = document.getElementById("message-modal");
@@ -185,7 +182,7 @@ function verification() {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams(user).toString(), 
+    body: new URLSearchParams(user).toString(),
   })
     .then((response) => {
       if (!response.ok) {

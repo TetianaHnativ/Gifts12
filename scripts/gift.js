@@ -40,22 +40,51 @@ const favourites = JSON.parse(localStorage.getItem('favouritesGifts')) || [];;
 
 giftBasket.addEventListener("click", () => {
   if (user !== 0) {
-    if (!basket.includes(gift.id)) basket.push(gift.id);
-    localStorage.setItem("basket", JSON.stringify(basket));
-    ModalMessage("Подарунок додано до кошика!");
+    addToListGift("basketDatabase.php", "Подарунок додано до кошика!", "кошика");
   } else {
     ModalMessage("Авторизуйтеся, будь ласка!");
   }
 });
+
 giftSelected.addEventListener("click", () => {
   if (user !== 0) {
-    if (!favourites.includes(gift.id)) favourites.push(gift.id);
-    localStorage.setItem("favouritesGifts", JSON.stringify(favourites));
-    ModalMessage("Подарунок додано до списку улюблених!");
+    addToListGift("favouritesGiftDatabase.php", "Подарунок додано до списку улюблених!", "списку улюблених");
   } else {
     ModalMessage("Авторизуйтеся, будь ласка!");
   }
 });
+
+function addToListGift(file, message, messageWord) {
+  const favouriteGift = {
+    name: "gift",
+    gift: gift.id,
+    user: user,
+  };
+
+  fetch(`./phpDatabase/${file}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(favouriteGift).toString(),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("status code:" + response.status);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      if (data.trim() === "added") {
+        ModalMessage(message);
+      } else if (data.trim() === "already exists") {
+        ModalMessage(`Подарунок вже доданий до ${messageWord}!`);
+      }
+    })
+    .catch((error) => {
+      console.error("error: ", error);
+    });
+}
 
 if (gift.number > 0) {
   giftAvailability.textContent = "У наявності";

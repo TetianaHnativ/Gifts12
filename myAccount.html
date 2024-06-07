@@ -1,188 +1,139 @@
 <!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,700&family=Raleway:wght@700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,700&family=Raleway:wght@700&display=swap"
+    rel="stylesheet" />
 
-    <link rel="stylesheet" href="./styles/reset.css" />
-    <link rel="stylesheet" href="./styles/myAccountHeader.css" />
-    <link rel="stylesheet" href="./styles/myAccountMain.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
-    <title>Gifts</title>
-  </head>
+  <link rel="stylesheet" href="./styles/reset.css" />
+  <link rel="stylesheet" href="./styles/myAccountHeader.css" />
+  <link rel="stylesheet" href="./styles/myAccountMain.css" />
 
-  <body>
-    <div class="wrapper">
-      <header>
-        <div class="user">
-          <i class="fas fa-user-circle"></i>
-          <h3 class="user-title">Tetiana Hnativ</h3>
-        </div>
-        <nav class="bacis-navigation">
-          <ul class="nav-list">
-            <li class="nav-links-item">
-              <a class="nav-links" href="index.html"
-                ><i class="fa fa-home"></i> Головна <i class="fa fa-home"></i
-              ></a>
-            </li>
-            <li class="nav-links-item">
-              <a class="nav-links" href="#favourites-gifts"
-                ><i class="fas fa-heart"></i> Улюблені подарунки
-                <i class="fas fa-gift"></i
-              ></a>
-            </li>
-            <li class="nav-links-item">
-              <a class="nav-links" href="#basket"
-                ><i class="fas fa-shopping-basket"></i> Кошик
-                <i class="fas fa-shopping-basket"></i
-              ></a>
-            </li>
-            <li class="nav-links-item">
-              <a class="nav-links" href="#my-data"
-                ><i class="fas fa-database"></i> Особисті дані
-                <i class="fas fa-database"></i
-              ></a>
-            </li>
-            <li class="nav-links-item">
-              <a class="nav-links" href="#my-ideas"
-                ><i class="fas fa-lightbulb"></i> Мої ідеї
-                <i class="fas fa-lightbulb"></i
-              ></a>
-            </li>
-            <li class="nav-links-item">
-              <a class="nav-links" href="#favourites-ideas"
-                ><i class="fas fa-heart"></i> Улюблені ідеї
-                <i class="fas fa-lightbulb"></i
-              ></a>
-            </li>
-          </ul>
-        </nav>
-        <button class="log-out">Вийти</button>
-      </header>
+  <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
+  <title>Gifts</title>
+</head>
 
-      <div id="menu" class="fa fa-bars"></div>
-      <main>
-        <section id="favourites-gifts">
-          <h2 class="important-title favourites-gifts-title">
-            Улюблені подарунки
-          </h2>
-          <ul class="list" id="favourites-gifts-list"></ul>
-        </section>
-        <section id="basket">
-          <h2 class="important-title basket-main-title">Кошик</h2>
-          <ul class="list" id="basket-gifts-list"></ul>
-          <button class="my-account-button" id="buy-button">Купити все</button>
-        </section>
-        <section id="my-data">
-          <h2 class="important-title data-main-title">Особисті дані</h2>
-          <form action="" class="my-data-form">
-            <div class="form-elements">
-              <input
-                type="text"
-                class="my-data-parameter"
-                id="surname"
-                placeholder="Введіть прізвище"
-                required
-              />
-              <input
-                type="text"
-                class="my-data-parameter"
-                id="name"
-                placeholder="Введіть ім'я"
-                required
-              />
-              <input
-                type="tel"
-                class="my-data-parameter"
-                id="phone"
-                placeholder="Введіть номер телефону"
-                minlength="13"
-                maxlength="13"
-                pattern="\+[0-9]{12}"
-                title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX"
-                required
-              />
-              <input
-                type="email"
-                class="my-data-parameter"
-                id="login"
-                placeholder="Введіть електронну пошту"
-                pattern=".+@.+\..+"
-                title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com"
-                required
-              />
-              <div class="old-password-container">
-                <input
-                  type="password"
-                  class="my-data-parameter"
-                  id="old-password"
-                  placeholder="Введіть старий пароль"
-                  minlength="8"
-                />
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="user">
+        <i class="fas fa-user-circle"></i>
+        <h3 class="user-title">User</h3>
+      </div>
+      <nav class="bacis-navigation">
+        <ul class="nav-list">
+          <li class="nav-links-item">
+            <a class="nav-links" href="index.html"><i class="fa fa-home"></i> Головна <i class="fa fa-home"></i></a>
+          </li>
+          <li class="nav-links-item">
+            <a class="nav-links" href="#favourites-gifts"><i class="fas fa-heart"></i> Улюблені подарунки
+              <i class="fas fa-gift"></i></a>
+          </li>
+          <li class="nav-links-item">
+            <a class="nav-links" href="#basket"><i class="fas fa-shopping-basket"></i> Кошик
+              <i class="fas fa-shopping-basket"></i></a>
+          </li>
+          <li class="nav-links-item">
+            <a class="nav-links" href="#my-data"><i class="fas fa-database"></i> Особисті дані
+              <i class="fas fa-database"></i></a>
+          </li>
+          <li class="nav-links-item">
+            <a class="nav-links" href="#my-ideas"><i class="fas fa-lightbulb"></i> Мої ідеї
+              <i class="fas fa-lightbulb"></i></a>
+          </li>
+          <li class="nav-links-item">
+            <a class="nav-links" href="#favourites-ideas"><i class="fas fa-heart"></i> Улюблені ідеї
+              <i class="fas fa-lightbulb"></i></a>
+          </li>
+        </ul>
+      </nav>
+      <button class="log-out">Вийти</button>
+    </header>
 
-                <button type="button" class="my-data-button confirm-button">
-                  Підтвердити
-                </button>
-              </div>
-              <input
-                type="password"
-                class="my-data-parameter"
-                id="new-password"
-                placeholder="Введіть новий пароль"
-                pattern="^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)\S*$"
-                title="Пароль
-          має містити хоча б одну велику та маленьку літери та хоча б одну
-          цифру, все без пробілів!"
-                minlength="8"
-                autocomplete="new-password"
-                disabled
-              />
+    <div id="menu" class="fa fa-bars"></div>
+    <main>
+      <section id="favourites-gifts">
+        <h2 class="important-title favourites-gifts-title">
+          Улюблені подарунки
+        </h2>
+        <ul class="list" id="favourites-gifts-list"></ul>
+      </section>
+      <section id="basket">
+        <h2 class="important-title basket-main-title">Кошик</h2>
+        <ul class="list" id="basket-gifts-list"></ul>
+        <button class="my-account-button" id="buy-button">Купити все</button>
+      </section>
+      <section id="my-data">
+        <h2 class="important-title data-main-title">Особисті дані</h2>
+        <form action="" class="my-data-form">
+          <div class="form-elements">
+            <input type="text" class="my-data-parameter" id="surname" placeholder="Введіть прізвище" required />
+            <input type="text" class="my-data-parameter" id="name" placeholder="Введіть ім'я" required />
+            <input type="tel" class="my-data-parameter" id="phone" placeholder="Введіть номер телефону" minlength="13"
+              maxlength="13" pattern="\+[0-9]{12}" title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX" required />
+            <input type="email" class="my-data-parameter" id="login" placeholder="Введіть електронну пошту"
+              pattern=".+@.+\..+"
+              title="Домен електронної адреси має містити крапку. Необхідний формат: example@example.com" required />
+            <div class="old-password-container">
+              <input type="password" class="my-data-parameter" id="old-password" placeholder="Введіть старий пароль"
+                minlength="8" />
+
+              <button type="button" class="my-data-button confirm-button">
+                Підтвердити
+              </button>
             </div>
-            <p class="message"></p>
-            <button type="submit" class="my-data-button submit-button">
-              Зберегти
-            </button>
-          </form>
-        </section>
-        <section id="my-ideas">
-          <h2 class="important-title my-ideas-title">Мої ідеї</h2>
-          <ul class="list" id="my-ideas-list"></ul>
-        </section>
-        <section id="favourites-ideas">
-          <h2 class="important-title favourites-ideas-title">Улюблені ідеї</h2>
-          <ul class="list" id="favourites-ideas-list"></ul>
-        </section>
-      </main>
-    </div>
+            <input type="password" class="my-data-parameter" id="new-password" placeholder="Введіть новий пароль"
+              pattern="^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)\S*$" title="Пароль
+          має містити хоча б одну велику та маленьку літери та хоча б одну
+          цифру, все без пробілів!" minlength="8" autocomplete="new-password" disabled />
+            <input type="password" class="my-data-parameter" id="new-password-confirmation"
+              placeholder="Підтвердьте новий пароль" pattern="^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)\S*$" title="Пароль
+      має містити хоча б одну велику та маленьку літери та хоча б одну
+      цифру, все без пробілів!" minlength="8" autocomplete="password" disabled />
+          </div>
 
-    <div class="modal-container" id="message-modal">
-      <div class="container">
-        <button class="modal-close-button" id="message-close-button">x</button>
-        <h3 class="modal-title" id="message-title"></h3>
-      </div>
-    </div>
+          <p class="message"></p>
+          <button type="submit" class="my-data-button submit-button">
+            Зберегти
+          </button>
+        </form>
+      </section>
+      <section id="my-ideas">
+        <h2 class="important-title my-ideas-title">Мої ідеї</h2>
+        <ul class="list" id="my-ideas-list"></ul>
+      </section>
+      <section id="favourites-ideas">
+        <h2 class="important-title favourites-ideas-title">Улюблені ідеї</h2>
+        <ul class="list" id="favourites-ideas-list"></ul>
+      </section>
+    </main>
+  </div>
 
-    <div class="modal-container" id="message-modal">
-      <div class="container">
-        <button class="modal-close-button" id="message-close-button">x</button>
-        <h3 class="modal-title" id="message-title"></h3>
-      </div>
+  <div class="modal-container" id="message-modal">
+    <div class="container">
+      <button class="modal-close-button" id="message-close-button">x</button>
+      <h3 class="modal-title" id="message-title"></h3>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-    <script src="./scripts/myAccount.js"></script>
-  </body>
+  </div>
+
+  <div class="modal-container" id="message-modal">
+    <div class="container">
+      <button class="modal-close-button" id="message-close-button">x</button>
+      <h3 class="modal-title" id="message-title"></h3>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+  <script src="./scripts/myAccount.js"></script>
+</body>
+
 </html>
