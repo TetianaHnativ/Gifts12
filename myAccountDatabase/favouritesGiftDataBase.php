@@ -10,9 +10,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT ideas.*, users.surname, users.username 
-        FROM ideas
-        LEFT JOIN users ON ideas.user = users.id";
+$user = $_POST['id'];
+
+$sql = "SELECT favourites.id, favourites.name, favourites.gift_id, favourites.user, gifts.*
+FROM favourites
+LEFT JOIN gifts ON gifts.id = favourites.gift_id
+WHERE favourites.name = 'gift' AND favourites.user = '$user'";
 
 $result = $conn->query($sql);
 
@@ -20,14 +23,12 @@ $data_array = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Додавання рядка у масив
         $data_array[] = $row;
     }
 } else {
-    echo "No records found";
+    echo json_encode("No records found");
 }
 
 $conn->close();
 
-// Передача масиву у ваш скрипт
 echo json_encode($data_array);

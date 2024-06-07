@@ -10,9 +10,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$user = $_POST['id'];
+
 $sql = "SELECT ideas.*, users.surname, users.username 
         FROM ideas
-        LEFT JOIN users ON ideas.user = users.id";
+        LEFT JOIN users ON ideas.user = users.id
+        WHERE ideas.user = '$user'";
 
 $result = $conn->query($sql);
 

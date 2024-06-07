@@ -14,7 +14,9 @@ window.addEventListener("scroll", () => {
 window.addEventListener("beforeunload", function () {
   PasswordFields(true, "")
 
-  form.submit();
+  oldPassword.value = "";
+  newPassword.value = "";
+  passwordConfirmation.value = "";
 });
 
 const userTitle = document.querySelector(".user-title");
@@ -58,9 +60,9 @@ async function myAccountDataBase(server) {
 let gifts = [];
 let basket = [];
 
-async function updateLists() {
-  gifts = await myAccountDataBase("shopDatabase");
-  basket = await myAccountDataBase("shopDatabase");
+async function updateGiftsLists() {
+  gifts = await myAccountDataBase("favouritesGiftDataBase");
+  basket = await myAccountDataBase("basketGiftsDataBase");
   const favouritesGifts = document.getElementById("favourites-gifts-list"); // сам список
 
   gifts.forEach((element) => {
@@ -132,175 +134,10 @@ async function updateLists() {
   });
 }
 
-//updateLists();
-
-const ideas = [
-  {
-    id: 1,
-    imgSrc: "./imgs/makaron-idea.jpg",
-    name: "Макаруни",
-    author: "Julia Divuk",
-    price: 180,
-    phone: "+380667833456",
-    description: [
-      "jhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdhjhcjsdh",
-      "ndsivnsdivjhcjsdhjhcjsdh",
-      "njdvkdsnvkdsfjhcjsdhn",
-      "jvnvjfdnvjfdn",
-      "jhcjhcjsdhjhcjsdhjhcjsdhjhcjsdhjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-    ],
-  },
-  {
-    id: 2,
-    imgSrc: "./imgs/candles-idea.jpg",
-    name: "Свічки",
-    author: "Anna Ravna",
-    price: 100,
-    phone: "+380667833456",
-    description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn", "jvnvjfdnvjfdn"],
-  },
-  {
-    id: 3,
-    imgSrc: "./imgs/soap-idea.jpg",
-    name: "Мило",
-    author: "Maria Naum",
-    price: 0,
-    phone: "+380667833456",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-    ],
-  },
-  {
-    id: 4,
-    imgSrc: "./imgs/toys-idea.jpg",
-    name: "М'які іграшки",
-    author: "Tetiana Hnativ",
-    price: 200,
-    phone: "+380503388467",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-    ],
-  },
-  {
-    id: 5,
-    imgSrc: "./imgs/makaron-idea.jpg",
-    name: "Макаруни",
-    author: "Julia Divuk",
-    price: 0,
-    phone: "",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-    ],
-  },
-  {
-    id: 6,
-    imgSrc: "./imgs/candles-idea.jpg",
-    name: "Свічки",
-    author: "Anna Ravna",
-    price: 100,
-    phone: "+380667833456",
-    description: ["jhcjsdh", "ndsivnsdiv", "njdvkdsnvkdsfn"],
-  },
-  {
-    id: 7,
-    imgSrc: "./imgs/soap-idea.jpg",
-    name: "Мило",
-    author: "Maria Naum",
-    price: 150,
-    phone: "+380503388467",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-    ],
-  },
-  {
-    id: 8,
-    imgSrc: "./imgs/toys-idea.jpg",
-    name: "М'які іграшки",
-    author: "Tetiana Hnativ",
-    price: 0,
-    phone: "",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-    ],
-  },
-];
-
-const ownIdeas = [
-  {
-    id: 4,
-    imgSrc: "./imgs/toys-idea.jpg",
-    name: "М'які іграшки",
-    author: "Tetiana Hnativ",
-    price: 200,
-    phone: "+380503388467",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-    ],
-  },
-  {
-    id: 8,
-    imgSrc: "./imgs/toys-idea.jpg",
-    name: "М'які іграшки",
-    author: "Tetiana Hnativ",
-    price: 0,
-    phone: "",
-    description: [
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-      "jhcjsdh",
-      "ndsivnsdiv",
-      "njdvkdsnvkdsfn",
-      "jvnvjfdnvjfdn",
-    ],
-  },
-];
-
+updateGiftsLists();
 
 //-------------------------------------------------------------------------------------------------section id="my-data"-------------------------------------------------------------------------------------------------
+
 const dataForm = document.querySelector(".my-data-form");
 
 const surname = document.getElementById("surname");
@@ -444,13 +281,21 @@ function ModalMessage(title) {
 }
 
 //-------------------------------------------------------------------------------------------------section id="my-ideas"-------------------------------------------------------------------------------------------------
-const myIdeas = document.getElementById("my-ideas-list"); // сам список
+let ownIdeas = [];
 
-ownIdeas.forEach((element) => {
-  const li = document.createElement("li");
-  li.classList.add("my-ideas-item");
-  li.setAttribute("data-id", element.id);
-  li.innerHTML = `
+let ideas = [];
+
+async function updateIdeasLists() {
+  ownIdeas = await myAccountDataBase("myIdeasDataBase");
+  ideas = await myAccountDataBase("favouritesIdeaDataBase");
+
+  const myIdeas = document.getElementById("my-ideas-list"); // сам список
+
+  ownIdeas.forEach((element) => {
+    const li = document.createElement("li");
+    li.classList.add("my-ideas-item");
+    li.setAttribute("data-id", element.id);
+    li.innerHTML = `
   <button class="delete-button my-ideas-delete">x</button>
   <button class="edit-button my-ideas-edit"><i class="fas fa-pen"></i></button>
   <a class="idea-link" href="./idea.html">
@@ -461,35 +306,35 @@ ownIdeas.forEach((element) => {
     />
     <div class="idea-information">
       <h3 class="idea-name my-idea-name">${element.name}</h3>
-      <p class="idea-author my-idea-author">${element.author}</p>
+      <p class="idea-author my-idea-author">${element.surname} ${element.username}</p>
       <p class="idea-price my-idea-price">${element.price ? element.price + " грн." : "Безкоштовно"
-    } 
+      } 
       </p>
     </div>
   </a>`;
-  myIdeas.append(li);
-});
+    myIdeas.append(li);
+  });
 
-const myIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
+  const myIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
 
-myIdeas.addEventListener("click", (evt) => {
-  const myIdeasItem = evt.target.closest(".my-ideas-item");
-  let ideaId = 0;
-  if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
-  const idea = ideas.find((element) => element.id === ideaId);
-  const ideaString = JSON.stringify(idea);
-  sessionStorage.setItem("idea", ideaString);
-});
+  myIdeas.addEventListener("click", (evt) => {
+    const myIdeasItem = evt.target.closest(".my-ideas-item");
+    let ideaId = 0;
+    if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
+    const idea = ideas.find((element) => element.id === ideaId);
+    const ideaString = JSON.stringify(idea);
+    sessionStorage.setItem("idea", ideaString);
+  });
 
 
-//-------------------------------------------------------------------------------------------------section id="favourites-ideas"-------------------------------------------------------------------------------------------------
-const favouritesIdeas = document.getElementById("favourites-ideas-list"); // сам список
+  //-------------------------------------------------------------------------------------------------section id="favourites-ideas"-------------------------------------------------------------------------------------------------
+  const favouritesIdeas = document.getElementById("favourites-ideas-list"); // сам список
 
-ideas.forEach((element) => {
-  const li = document.createElement("li");
-  li.classList.add("favourites-ideas-item");
-  li.setAttribute("data-id", element.id);
-  li.innerHTML = `
+  ideas.forEach((element) => {
+    const li = document.createElement("li");
+    li.classList.add("favourites-ideas-item");
+    li.setAttribute("data-id", element.id);
+    li.innerHTML = `
   <button class="delete-button favourites-ideas-delete">x</button>
   <a class="idea-link" href="./idea.html">
     <img
@@ -501,20 +346,23 @@ ideas.forEach((element) => {
       <h3 class="idea-name favourites-idea-name">${element.name}</h3>
       <p class="idea-author favourites-idea-author">${element.author}</p>
       <p class="idea-price favourites-idea-price">${element.price ? element.price + " грн." : "Безкоштовно"
-    } 
+      } 
       </p>
     </div>
   </a>`;
-  favouritesIdeas.append(li);
-});
+    favouritesIdeas.append(li);
+  });
 
-const favouritesIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
+  const favouritesIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
 
-favouritesIdeas.addEventListener("click", (evt) => {
-  const favouritesIdeasItem = evt.target.closest(".favourites-ideas-item");
-  let ideaId = 0;
-  if (favouritesIdeasItem) ideaId = favouritesIdeasItem.getAttribute("data-id");
-  const idea = ideas.find((element) => element.id === ideaId);
-  const ideaString = JSON.stringify(idea);
-  sessionStorage.setItem("idea", ideaString);
-});
+  favouritesIdeas.addEventListener("click", (evt) => {
+    const favouritesIdeasItem = evt.target.closest(".favourites-ideas-item");
+    let ideaId = 0;
+    if (favouritesIdeasItem) ideaId = favouritesIdeasItem.getAttribute("data-id");
+    const idea = ideas.find((element) => element.id === ideaId);
+    const ideaString = JSON.stringify(idea);
+    sessionStorage.setItem("idea", ideaString);
+  });
+}
+
+updateIdeasLists();
