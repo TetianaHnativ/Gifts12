@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   <link rel="stylesheet" href="./styles/reset.css" />
+  <link rel="stylesheet" href="./styles/modal.css" />
   <link rel="stylesheet" href="./styles/myAccountHeader.css" />
   <link rel="stylesheet" href="./styles/myAccountMain.css" />
 
@@ -118,10 +119,14 @@
     </main>
   </div>
 
-  <div class="modal-container" id="message-modal">
+  <div class="modal-container" id="delete-modal">
     <div class="container">
-      <button class="modal-close-button" id="message-close-button">x</button>
-      <h3 class="modal-title" id="message-title"></h3>
+      <button class="modal-close-button" id="delete-close-button">x</button>
+      <h3 class="modal-title" id="delete-title">Чи дійсно хочете видалити?</h3>
+      <div class="modal-buttons">
+        <button class="modal-button" id="delete-item-button">Видалити</button>
+        <button class="modal-button" id="cancel-item-button">Відмінити</button>
+      </div>
     </div>
   </div>
 

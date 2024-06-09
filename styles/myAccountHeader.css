@@ -79,6 +79,7 @@ header {
     border-color:rgb(173, 50, 50);
     color: #fff;
     font-size: 25px;
+    padding: 5px 8px;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -106,5 +107,8 @@ header {
 @media (max-width: 500px) {
     header {
         width: 100%;
+    }
+    .log-out {
+        padding: 2px 5px;
     }
 }

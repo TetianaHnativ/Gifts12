@@ -23,11 +23,10 @@ $data_array = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Додавання рядка у масив
         $data_array[] = $row;
     }
 } else {
-    echo "No records found";
+    $data_array = array("error" => "No records found");
 }
 
 $conn->close();

@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
         echo json_encode("Error: " . $sql . "<br>" . $conn->error);
     }
 } else {
-    echo json_encode("No records found");
+    $data_array = array("error" => "No records found");
 }
 
 $conn->close();

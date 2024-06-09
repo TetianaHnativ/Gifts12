@@ -35,14 +35,14 @@ let userData = {
 
 userData.id = JSON.parse(localStorage.getItem('user'));
 
-async function myAccountDataBase(server) {
+async function myAccountDataBase(server, myData) {
   try {
     const response = await fetch(`./myAccountDatabase/${server}.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: new URLSearchParams(userData).toString(),
+      body: new URLSearchParams(myData).toString(),
     });
     if (!response.ok) {
       throw new Error("status code: " + response.status);
@@ -55,21 +55,71 @@ async function myAccountDataBase(server) {
   }
 }
 
+//-------------------------------------------------------------------------------------------------Модальне вікно message-------------------------------------------------------------------------------------------------
+const messageModal = document.getElementById("message-modal");
+const messageCloseButton = document.getElementById("message-close-button");
+const messageTitle = document.getElementById("message-title");
+
+const message = document.querySelector(".message");
+
+messageCloseButton.addEventListener("click", function () {
+  messageModal.style.display = "none";
+  window.location.reload();
+  dataForm.submit();
+});
+
+function ModalMessage(title, modal, titleModal) {
+  setTimeout(function () {
+    titleModal.textContent = title;
+    modal.style.display = "flex";
+  }, 0);
+
+  setTimeout(function () {
+    modal.style.display = "none";
+    window.location.reload();
+  }, 4000);
+}
+
+function Modal(title, modal, titleModal) {
+  titleModal.textContent = title;
+  modal.style.display = "flex";
+}
+
+//------------------------------------------------------------------------------------------------- delete items ---------------------------------------------------------------------------------------------------------
+const deleteModal = document.getElementById("delete-modal");
+
+const deleteTitle = document.getElementById("delete-title");
+
+const deleteCloseButton = document.getElementById("delete-close-button");
+const deleteItemButton = document.getElementById("delete-item-button");
+const cancelItemButton = document.getElementById("cancel-item-button");
+
+closeModal(deleteCloseButton, deleteModal);
+closeModal(cancelItemButton, deleteModal);
+
+function closeModal(button, form) {
+  button.addEventListener("click", function () {
+    form.style.display = "none";
+  });
+}
+
 //-------------------------------------------------------------------------------------------------section id="favourites-gifts"-------------------------------------------------------------------------------------------------
 
 let gifts = [];
 let basket = [];
 
 async function updateGiftsLists() {
-  gifts = await myAccountDataBase("favouritesGiftDataBase");
-  basket = await myAccountDataBase("basketGiftsDataBase");
+  gifts = await myAccountDataBase("favouritesGiftDataBase", userData);
+  basket = await myAccountDataBase("basketGiftsDataBase", userData);
+
   const favouritesGifts = document.getElementById("favourites-gifts-list"); // сам список
 
-  gifts.forEach((element) => {
-    const li = document.createElement("li");
-    li.classList.add("favourites-gifts-item");
-    li.setAttribute("data-id", element.id);
-    li.innerHTML = `
+  if (gifts && gifts.length > 0) {
+    gifts.forEach((element) => {
+      const li = document.createElement("li");
+      li.classList.add("favourites-gifts-item");
+      li.setAttribute("data-id", element.id);
+      li.innerHTML = `
   <button class="delete-button favourites-gifts-delete">x</button>
   <a class="gift-link" href="./gift.html"
       ><img
@@ -83,29 +133,53 @@ async function updateGiftsLists() {
         <p class="gift-price favourites-gift-price">${element.price} грн.</p>
       </div>
     </a>`;
-    favouritesGifts.append(li);
-  });
+      favouritesGifts.append(li);
+    });
 
-  const favouritesGiftsItem = document.querySelectorAll(".favourites-gifts-item"); // список усіх товарів
+    const favouritesGiftsItem = document.querySelectorAll(".favourites-gifts-item"); // список усіх товарів
 
-  favouritesGifts.addEventListener("click", (evt) => {
-    const favouritesGiftsItem = evt.target.closest(".favourites-gifts-item");
-    let giftId = 0;
-    if (favouritesGiftsItem) giftId = favouritesGiftsItem.getAttribute("data-id");
-    const gift = gifts.find((element) => element.id === giftId);
-    const giftString = JSON.stringify(gift);
-    sessionStorage.setItem("gift", giftString);
-  });
+    favouritesGifts.addEventListener("click", (evt) => {
+      const favouritesGiftsItem = evt.target.closest(".favourites-gifts-item");
+      let giftId = 0;
+      if (favouritesGiftsItem) giftId = favouritesGiftsItem.getAttribute("data-id");
+      const gift = gifts.find((element) => element.id === giftId);
 
+      const giftString = JSON.stringify(gift);
+      sessionStorage.setItem("gift", giftString);
+    });
+
+    const favouritesGiftsDelete = document.querySelectorAll(".favourites-gifts-delete");
+
+    favouritesGiftsDelete.forEach(button => {
+      button.addEventListener("click", (evt) => {
+        const favouritesGiftsItem = evt.target.closest(".favourites-gifts-item");
+        let giftId = 0;
+        if (favouritesGiftsItem) giftId = favouritesGiftsItem.getAttribute("data-id");
+        const gift = gifts.find((element) => element.id === giftId);
+
+        //console.log(gift);
+
+        Modal(`Чи дійсно хочете видалити подарунок "${gift.name}" з улюблених?`, deleteModal, deleteTitle);
+
+        deleteItemButton.addEventListener("click", async function () {
+          if (await myAccountDataBase("deleteDatabase", { id: gift.id, name: "favourite gift" }) === "deletion successful") {
+            deleteModal.style.display = "none";
+            ModalMessage("Подарунок видалено з улюблених!", messageModal, messageTitle);
+          }
+        })
+      });
+    });
+  }
 
   //-------------------------------------------------------------------------------------------------section id="basket-gifts"-------------------------------------------------------------------------------------------------
   const basketGifts = document.getElementById("basket-gifts-list"); // сам список
 
-  basket.forEach((element) => {
-    const li = document.createElement("li");
-    li.classList.add("basket-gifts-item");
-    li.setAttribute("data-id", element.id);
-    li.innerHTML = `
+  if (basket && basket.length > 0) {
+    basket.forEach((element) => {
+      const li = document.createElement("li");
+      li.classList.add("basket-gifts-item");
+      li.setAttribute("data-id", element.id);
+      li.innerHTML = `
   <button class="delete-button basket-delete">x</button>
   <a class="gift-link" href="./gift.html"
       ><img
@@ -119,19 +193,43 @@ async function updateGiftsLists() {
         <p class="gift-price basket-price">${element.price} грн.</p>
       </div>
     </a>`;
-    basketGifts.append(li);
-  });
+      basketGifts.append(li);
+    });
 
-  const basketGiftsItem = document.querySelectorAll(".basket-gifts-item"); // список усіх товарів
+    const basketGiftsItem = document.querySelectorAll(".basket-gifts-item"); // список усіх товарів
 
-  basketGifts.addEventListener("click", (evt) => {
-    const basketGiftsItem = evt.target.closest(".basket-gifts-item");
-    let giftId = 0;
-    if (basketGiftsItem) giftId = basketGiftsItem.getAttribute("data-id");
-    const gift = shop.find((element) => element.id === giftId);
-    const giftString = JSON.stringify(gift);
-    sessionStorage.setItem("gift", giftString);
-  });
+    basketGifts.addEventListener("click", async function (evt) {
+      const basketGiftsItem = evt.target.closest(".basket-gifts-item");
+      let giftId = 0;
+      if (basketGiftsItem) giftId = basketGiftsItem.getAttribute("data-id");
+      const gift = basket.find((element) => element.id === giftId);
+
+      const giftString = JSON.stringify(gift);
+      sessionStorage.setItem("gift", giftString);
+    });
+
+    const basketGiftsDelete = document.querySelectorAll(".basket-delete");
+
+    basketGiftsDelete.forEach(button => {
+      button.addEventListener("click", (evt) => {
+        const basketGiftsItem = evt.target.closest(".basket-gifts-item");
+        let giftId = 0;
+        if (basketGiftsItem) giftId = basketGiftsItem.getAttribute("data-id");
+        const gift = basket.find((element) => element.id === giftId);
+
+        //console.log(gift);
+
+        Modal(`Чи дійсно хочете видалити подарунок "${gift.name}" з кошика?`, deleteModal, deleteTitle);
+
+        deleteItemButton.addEventListener("click", async function () {
+          if (await myAccountDataBase("deleteDatabase", { id: gift.id, name: "basket gift" }) === "deletion successful") {
+            deleteModal.style.display = "none";
+            ModalMessage("Подарунок видалено з кошика!", messageModal, messageTitle);
+          }
+        })
+      });
+    });
+  }
 }
 
 updateGiftsLists();
@@ -166,7 +264,7 @@ email.addEventListener("blur", function () {
 if (userData) {
   async function myData() {
     try {
-      const data = await myAccountDataBase("myDataDatabase");
+      const data = await myAccountDataBase("myDataDatabase", userData);
       // console.log(data);
       userTitle.textContent = data[0].surname + " " + data[0].username;
 
@@ -186,7 +284,7 @@ if (userData) {
 
   async function myPassword() {
     try {
-      const data = await myAccountDataBase("savePasswordDatabase");
+      const data = await myAccountDataBase("savePasswordDatabase", userData);
       //console.log(data);
       return data;
     } catch (error) {
@@ -196,7 +294,7 @@ if (userData) {
 
   async function saveData() {
     try {
-      const data = await myAccountDataBase("saveDataDatabase");
+      const data = await myAccountDataBase("saveDataDatabase", userData);
       //console.log(data);
       return data;
     } catch (error) {
@@ -237,7 +335,11 @@ if (userData) {
       userData.newPassword = newPassword.value;
 
       if (await saveData() === "success") {
-        ModalMessage("Ваші дані оновлено!");
+        ModalMessage("Ваші дані оновлено!", messageModal, messageTitle);
+        PasswordFields(true, "");
+        oldPassword.value = "";
+        newPassword.value = "";
+        passwordConfirmation.value = "";
       }
     }
 
@@ -256,46 +358,24 @@ function PasswordFields(value, mess) {
   passwordConfirmation.required = !value;
 }
 
-//-------------------------------------------------------------------------------------------------Модальне вікно-------------------------------------------------------------------------------------------------
-const messageModal = document.getElementById("message-modal");
-const messageCloseButton = document.getElementById("message-close-button");
-const messageTitle = document.getElementById("message-title");
-
-const message = document.querySelector(".message");
-
-messageCloseButton.addEventListener("click", function () {
-  messageModal.style.display = "none";
-  dataForm.submit();
-});
-
-function ModalMessage(title) {
-  setTimeout(function () {
-    messageTitle.textContent = title;
-    messageModal.style.display = "flex";
-  }, 0);
-
-  setTimeout(function () {
-    messageModal.style.display = "none";
-    dataForm.submit();
-  }, 4000);
-}
-
 //-------------------------------------------------------------------------------------------------section id="my-ideas"-------------------------------------------------------------------------------------------------
 let ownIdeas = [];
 
 let ideas = [];
 
 async function updateIdeasLists() {
-  ownIdeas = await myAccountDataBase("myIdeasDataBase");
-  ideas = await myAccountDataBase("favouritesIdeaDataBase");
+  ownIdeas = await myAccountDataBase("myIdeasDataBase", userData);
+  ideas = await myAccountDataBase("favouritesIdeaDataBase", userData);
 
   const myIdeas = document.getElementById("my-ideas-list"); // сам список
 
-  ownIdeas.forEach((element) => {
-    const li = document.createElement("li");
-    li.classList.add("my-ideas-item");
-    li.setAttribute("data-id", element.id);
-    li.innerHTML = `
+  if (ownIdeas && ownIdeas.length > 0) {
+
+    ownIdeas.forEach((element) => {
+      const li = document.createElement("li");
+      li.classList.add("my-ideas-item");
+      li.setAttribute("data-id", element.id);
+      li.innerHTML = `
   <button class="delete-button my-ideas-delete">x</button>
   <button class="edit-button my-ideas-edit"><i class="fas fa-pen"></i></button>
   <a class="idea-link" href="./idea.html">
@@ -308,33 +388,58 @@ async function updateIdeasLists() {
       <h3 class="idea-name my-idea-name">${element.name}</h3>
       <p class="idea-author my-idea-author">${element.surname} ${element.username}</p>
       <p class="idea-price my-idea-price">${element.price ? element.price + " грн." : "Безкоштовно"
-      } 
+        } 
       </p>
     </div>
   </a>`;
-    myIdeas.append(li);
-  });
+      myIdeas.append(li);
+    });
 
-  const myIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
+    const myIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
 
-  myIdeas.addEventListener("click", (evt) => {
-    const myIdeasItem = evt.target.closest(".my-ideas-item");
-    let ideaId = 0;
-    if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
-    const idea = ideas.find((element) => element.id === ideaId);
-    const ideaString = JSON.stringify(idea);
-    sessionStorage.setItem("idea", ideaString);
-  });
+    myIdeas.addEventListener("click", (evt) => {
+      const myIdeasItem = evt.target.closest(".my-ideas-item");
+      let ideaId = 0;
+      if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
+      const idea = ideas.find((element) => element.id === ideaId);
 
+      const ideaString = JSON.stringify(idea);
+      sessionStorage.setItem("idea", ideaString);
+    });
+
+    const myIdeasDelete = document.querySelectorAll(".my-ideas-delete");
+
+    myIdeasDelete.forEach(button => {
+      button.addEventListener("click", (evt) => {
+        const myIdeasItem = evt.target.closest(".my-ideas-item");
+        let ideaId = 0;
+        if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
+        const idea = ownIdeas.find((element) => element.id === ideaId);
+
+        //console.log(idea);
+
+        Modal(`Чи дійсно хочете видалити свою ідею "${idea.name}" усюди?`, deleteModal, deleteTitle);
+
+        deleteItemButton.addEventListener("click", async function () {
+          if (await myAccountDataBase("deleteDatabase", { id: idea.id, name: "my idea" }) === "deletion successful") {
+            deleteModal.style.display = "none";
+            ModalMessage("Вашу ідею видалено!", messageModal, messageTitle);
+          }
+        })
+      });
+    });
+  }
 
   //-------------------------------------------------------------------------------------------------section id="favourites-ideas"-------------------------------------------------------------------------------------------------
   const favouritesIdeas = document.getElementById("favourites-ideas-list"); // сам список
 
-  ideas.forEach((element) => {
-    const li = document.createElement("li");
-    li.classList.add("favourites-ideas-item");
-    li.setAttribute("data-id", element.id);
-    li.innerHTML = `
+  if (ideas && ideas.length > 0) {
+
+    ideas.forEach((element) => {
+      const li = document.createElement("li");
+      li.classList.add("favourites-ideas-item");
+      li.setAttribute("data-id", element.id);
+      li.innerHTML = `
   <button class="delete-button favourites-ideas-delete">x</button>
   <a class="idea-link" href="./idea.html">
     <img
@@ -346,23 +451,47 @@ async function updateIdeasLists() {
       <h3 class="idea-name favourites-idea-name">${element.name}</h3>
       <p class="idea-author favourites-idea-author">${element.author}</p>
       <p class="idea-price favourites-idea-price">${element.price ? element.price + " грн." : "Безкоштовно"
-      } 
+        } 
       </p>
     </div>
   </a>`;
-    favouritesIdeas.append(li);
-  });
+      favouritesIdeas.append(li);
+    });
 
-  const favouritesIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
+    const favouritesIdeasItem = document.querySelectorAll(".favourites-ideas-item"); // список усіх товарів
 
-  favouritesIdeas.addEventListener("click", (evt) => {
-    const favouritesIdeasItem = evt.target.closest(".favourites-ideas-item");
-    let ideaId = 0;
-    if (favouritesIdeasItem) ideaId = favouritesIdeasItem.getAttribute("data-id");
-    const idea = ideas.find((element) => element.id === ideaId);
-    const ideaString = JSON.stringify(idea);
-    sessionStorage.setItem("idea", ideaString);
-  });
+    favouritesIdeas.addEventListener("click", (evt) => {
+      const favouritesIdeasItem = evt.target.closest(".favourites-ideas-item");
+      let ideaId = 0;
+      if (favouritesIdeasItem) ideaId = favouritesIdeasItem.getAttribute("data-id");
+      const idea = ideas.find((element) => element.id === ideaId);
+
+      const ideaString = JSON.stringify(idea);
+      sessionStorage.setItem("idea", ideaString);
+    });
+
+    const favouritesIdeasDelete = document.querySelectorAll(".favourites-ideas-delete");
+
+    favouritesIdeasDelete.forEach(button => {
+      button.addEventListener("click", (evt) => {
+        const favouritesIdeasItem = evt.target.closest(".favourites-ideas-item");
+        let ideaId = 0;
+        if (favouritesIdeasItem) ideaId = favouritesIdeasItem.getAttribute("data-id");
+        const idea = ideas.find((element) => element.id === ideaId);
+
+        //console.log(idea);
+
+        Modal(`Чи дійсно хочете видалити ідею "${idea.name}" з улюблених?`, deleteModal, deleteTitle);
+
+        deleteItemButton.addEventListener("click", async function () {
+          if (await myAccountDataBase("deleteDatabase", { id: idea.id, name: "favourite idea" }) === "deletion successful") {
+            deleteModal.style.display = "none";
+            ModalMessage("Ідею видалено з улюблених!", messageModal, messageTitle);
+          }
+        })
+      });
+    });
+  }
 }
 
 updateIdeasLists();

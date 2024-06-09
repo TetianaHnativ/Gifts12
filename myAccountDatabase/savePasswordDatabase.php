@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
         echo json_encode("password wrong");
     }
 } else {
-    echo json_encode("No records found");
+    $data_array = array("error" => "No records found");
 }
 
 $conn->close();
