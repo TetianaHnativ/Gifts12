@@ -121,13 +121,14 @@
       </div>
     </footer>
   </div>
+  
   <div class="modal-container" id="add-idea-modal">
     <div class="container">
       <button class="modal-close-button" id="close-modal-idea">x</button>
       <h3 class="modal-title">Додай ідею</h3>
       <form id="idea-form" action="" class="modal-form">
 
-        <input type="url" id="imageUrl" name="imageUrl" class="modal-input" placeholder="URL зображення" />
+        <input type="url" id="imageUrl" name="imageUrl" class="modal-input" placeholder="URL зображення" oninput="gaps(this)"/>
         <input type="text" id="name" class="modal-input" placeholder="Назва ідеї" onblur="removeSpaces(this)"
           required />
         <input type="text" id="price" class="modal-input" name="price" placeholder="Ціна"
@@ -137,7 +138,7 @@
         <input type="tel" id="phone" class="modal-input" name="phone" placeholder="Номер телефону" minlength="13"
           maxlength="13" pattern="\+[0-9]{12}" title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX" oninput="gaps(this)"
           required />
-        <textarea id="description" class="modal-textarea" name="" id="" cols="30" rows="10" placeholder="Опис"
+        <textarea id="description" class="modal-textarea" name="" id="" cols="30" rows="10" placeholder="Опис" onblur="removeSpaces(this)"
           required></textarea>
         <button id="submit-button" class="add-button">Додати</button>
       </form>

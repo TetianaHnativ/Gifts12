@@ -379,7 +379,7 @@ section {
   border: 1px solid #038cff;
 }
 
-/*Modals delete*/
+/*Modal delete*/
 #delete-modal {
   z-index: 200;
   display: none;
@@ -415,6 +415,71 @@ section {
 
 #cancel-item-button:focus,
 #cancel-item-button:hover {
+  background-color: #053053;
+}
+
+/*Modal edit idea*/
+#edit-idea-modal {
+  z-index: 200;
+  display: none;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.img-button {
+  text-align: center;
+  background-color: #ebed4d;
+  border: solid 2px #ffbc03;
+  color: #038cff;
+  font-size: 20px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.img-button:hover,
+.img-button:focus {
+  background-color: #ffbc03;
+}
+
+.custom-button-label {
+  cursor: pointer;
+}
+
+.modal-input {
+  font-size: 20px;
+  text-align: center;
+}
+
+.modal-textarea {
+  font-size: 18px;
+}
+
+#submit-button {
+  font-size: 20px;
+}
+
+.edit-save-button {
+  font-size: 22px;
+  background-color: #038cff;
+  border-color: #053053;
+  color: #ffbc03;
+  letter-spacing: 2px;
+  font-weight: bold;
+
+  padding: 4px 16px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.edit-save-button:hover,
+.edit-save-button:focus {
   background-color: #053053;
 }
 
@@ -459,6 +524,7 @@ section {
 
   .modal-title {
     max-width: 250px;
+    font-size: 22px;
   }
 
   .modal-field-input {
@@ -477,5 +543,23 @@ section {
   .modal-button {
     font-size: 20px;
     padding: 2px 5px;
+  }
+
+  /*Modal edit*/
+  .img-button {
+    font-size: 18px;
+  }
+
+
+  .modal-input {
+    font-size: 18px;
+  }
+
+  .modal-textarea {
+    font-size: 15px;
+  }
+
+  #submit-button {
+    font-size: 18px;
   }
 }

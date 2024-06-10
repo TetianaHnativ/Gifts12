@@ -43,6 +43,7 @@ async function myAccountDataBase(server, myData) {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams(myData).toString(),
+      cache: "no-cache", // IMPORTANT --- запит не буде кешуватися, що може допомогти уникнути відображення даних в URL
     });
     if (!response.ok) {
       throw new Error("status code: " + response.status);
@@ -358,10 +359,50 @@ function PasswordFields(value, mess) {
   passwordConfirmation.required = !value;
 }
 
+//------------------------------------------------------------------------------------------------- edit items -----------------------------------------------------------------------------------------------------------
+const editIdeaModal = document.getElementById("edit-idea-modal");
+const editModalTitle = document.getElementById("edit-title");
+
+const ideaForm = document.getElementById("idea-form");
+
+const closeModalIdea = document.getElementById("close-modal-idea");
+
+closeModalIdea.addEventListener("click", () => {
+  editIdeaModal.style.display = "none";
+  window.location.reload();
+});
+
+function gapsEdit(inputElement) {
+  if (inputElement.value.includes(" ")) {
+    inputElement.value = inputElement.value.replace(/\s/g, "");
+  }
+}
+
+function removeSpaces(inputElement) {
+  inputElement.value = inputElement.value.trim().replace(/\s+/g, " ");
+}
+
 //-------------------------------------------------------------------------------------------------section id="my-ideas"-------------------------------------------------------------------------------------------------
 let ownIdeas = [];
 
 let ideas = [];
+
+let myIdea = {
+  id: 0,
+  img: "",
+  name: "",
+  user: userData.id,
+  price: 0,
+  phone: "",
+  description: "",
+};
+
+const ideaImageUrl = document.getElementById("imageUrl");
+const ideaName = document.getElementById("idea-name");
+const ideaPrice = document.getElementById("price");
+const ideaPhone = document.getElementById("idea-phone");
+const ideaDescription = document.getElementById("description");
+
 
 async function updateIdeasLists() {
   ownIdeas = await myAccountDataBase("myIdeasDataBase", userData);
@@ -401,7 +442,7 @@ async function updateIdeasLists() {
       const myIdeasItem = evt.target.closest(".my-ideas-item");
       let ideaId = 0;
       if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
-      const idea = ideas.find((element) => element.id === ideaId);
+      const idea = ownIdeas.find((element) => element.id === ideaId);
 
       const ideaString = JSON.stringify(idea);
       sessionStorage.setItem("idea", ideaString);
@@ -427,6 +468,47 @@ async function updateIdeasLists() {
           }
         })
       });
+    });
+
+    const myIdeasEdit = document.querySelectorAll(".my-ideas-edit");
+
+    myIdeasEdit.forEach(button => {
+      button.addEventListener("click", async function (evt) {
+        const myIdeasItem = evt.target.closest(".my-ideas-item");
+        let ideaId = 0;
+        if (myIdeasItem) ideaId = myIdeasItem.getAttribute("data-id");
+        const idea = ownIdeas.find((element) => element.id === ideaId);
+
+        Modal(`Редагування ідеї "${idea.name}"`, editIdeaModal, editModalTitle);
+
+        const data = await myAccountDataBase("oneMyIdeaDataBase", { id: idea.id });
+
+        //console.log(data);
+
+        ideaImageUrl.value = data[0].img;
+        ideaName.value = data[0].name;
+        ideaPrice.value = data[0].price;
+        ideaPhone.value = data[0].phone;
+        ideaDescription.value = data[0].description;
+
+        ideaForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          newIdea = {
+            id: idea.id,
+            img: ideaImageUrl.value,
+            name: ideaName.value,
+            user: userData.id,
+            price: ideaPrice.value,
+            phone: ideaPhone.value,
+            description: ideaDescription.value,
+          };
+
+          if (await myAccountDataBase("editIdeaDataBase", newIdea) === "editing successful") {
+            editIdeaModal.style.display = "none";
+            ModalMessage("Вашу ідею редаговано!", messageModal, messageTitle);
+          }
+        });
+      })
     });
   }
 

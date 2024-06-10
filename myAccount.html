@@ -130,6 +130,30 @@
     </div>
   </div>
 
+  <div class="modal-container" id="edit-idea-modal">
+    <div class="container">
+      <button class="modal-close-button" id="close-modal-idea">x</button>
+      <h3 class="modal-title" id="edit-title"></h3>
+      <form id="idea-form" action="" class="modal-form">
+
+        <input type="url" id="imageUrl" name="imageUrl" class="modal-input" placeholder="URL зображення"
+          oninput="gapsEdit(this)" />
+        <input type="text" id="idea-name" class="modal-input" placeholder="Назва ідеї" onblur="removeSpaces(this)"
+          required />
+        <input type="text" id="price" class="modal-input" name="price" placeholder="Ціна"
+          pattern="^(?=.*[0-9])\d*(?:\.\d{0,2})?$" maxlength="8"
+          title="Ціна може бути цілим або десятковим числом з не більше, ніж з двома знаками після КРАПКИ"
+          oninput="gapsEdit(this)" required />
+        <input type="tel" id="idea-phone" class="modal-input" name="phone" placeholder="Номер телефону" minlength="13"
+          maxlength="13" pattern="\+[0-9]{12}" title="Формат міжнародний (+12 цифр): +XXXXXXXXXXXX"
+          oninput="gapsEdit(this)" required />
+        <textarea id="description" class="modal-textarea" name="" id="" cols="30" rows="10" placeholder="Опис"
+          onblur="removeSpaces(this)" required></textarea>
+        <button id="submit-button" class="edit-save-button">Зберегти</button>
+      </form>
+    </div>
+  </div>
+
   <div class="modal-container" id="message-modal">
     <div class="container">
       <button class="modal-close-button" id="message-close-button">x</button>
