@@ -1,12 +1,13 @@
 import { gaps } from "../scripts/functions.js";
 
+const user = localStorage.getItem("user") || "";
+
 const messageAuthorization = document.getElementById("message-authorization");
 const form = document.querySelector(".authorization");
 const passwordLink = document.querySelector(".password-link");
 
 const login = document.getElementById("login");
 const password = document.getElementById("password");
-
 
 // Модальне вікно
 const messageModal = document.getElementById("message-modal");
@@ -168,7 +169,11 @@ login.addEventListener("blur", function () {
 
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
-  verification();
+  if (user) {
+    ModalMessage("Ви вже авторизовані в системі!");
+  } else {
+    verification();
+  }
 });
 
 function verification() {

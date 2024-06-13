@@ -144,3 +144,9 @@ main {
   color: #ffbc03;
   font-size: 18px;
 }
+
+/* basket icon */
+.basket-link {
+  font-size: 30px;
+  color: #053053;
+}

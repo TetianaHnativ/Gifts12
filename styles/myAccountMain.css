@@ -132,7 +132,7 @@ section {
   border: 1px solid #038cff;
 }
 
-/*section id="baske"*/
+/*section id="basket"*/
 #basket {
   border: 1px solid #038cff;
 }
@@ -184,6 +184,10 @@ section {
 .my-account-button:focus,
 .my-account-button:hover {
   background-color: #038cff;
+}
+
+#buy-button:disabled {
+  background-color: rgba(5, 48, 83, 0.75);
 }
 
 /*section id="my-data"*/
@@ -241,10 +245,18 @@ section {
   border-color: #ffbc03;
 }
 
+.confirm-button:disabled {
+  background-color: rgba(255, 188, 3, 0.75);
+}
+
 .submit-button {
   background-color: #053053;
   color: #fff;
   border-color: #053053;
+}
+
+.submit-button:disabled {
+  background-color: rgba(5, 48, 83, 0.75);
 }
 
 .message {
@@ -461,12 +473,14 @@ section {
   font-size: 18px;
 }
 
-#submit-button {
+#submit-idea-button {
   font-size: 20px;
 }
 
-.edit-save-button {
-  font-size: 22px;
+/*modal edit data and order*/
+
+.save-button {
+  font-size: 20px;
   background-color: #038cff;
   border-color: #053053;
   color: #ffbc03;
@@ -478,13 +492,150 @@ section {
   border-radius: 10px;
 }
 
-.edit-save-button:hover,
-.edit-save-button:focus {
+.save-button:hover,
+.save-button:focus {
   background-color: #053053;
 }
 
+/*Modal form order*/
+#basket-modal {
+  display: none;
+  z-index: 200;
+}
+
+.basket-container {
+  max-height: 500px;
+  overflow-y: scroll;
+
+  margin: 5px 15px;
+}
+
+#basket-close-button {
+  font-size: 18px;
+  color: #fff;
+  background-color: #038cff;
+  border-color: #038cff;
+}
+
+#basket-title {
+  font-size: 30px;
+}
+
+#order-form {
+  gap: 35px;
+}
+
+.basket-modal-list {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.basket-modal-item {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #038cff;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.order-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.order-gift-name {
+  text-align: center;
+  color: #053053;
+  font-size: 22px;
+  letter-spacing: 3px;
+  max-width: 200px;
+}
+
+.modal-label-number {
+  font-size: 20px;
+  color: #038cff;
+  text-align: center;
+}
+
+.modal-field-number {
+  max-width: 50px;
+}
+
+.modal-price-text {
+  font-size: 20px;
+  color: #053053;
+  text-align: center;
+}
+
+.modal-price {
+  color: #ffbc03;
+  font-size: 22px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.all-price-text {
+  text-align: center;
+  font-size: 25px;
+  color: #038cff;
+  font-weight: bold;
+}
+
+.all-price {
+  text-align: center;
+  font-size: 30px;
+  color: #ffbc03;
+}
+
+.order-input {
+  font-size: 25px;
+}
+
+.packaging-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.packaging-item {
+  font-size: 25px;
+}
+
+.blue {
+  color: #038cff;
+  padding: 4px;
+}
+
+.white {
+  color: #fff;
+  padding: 4px;
+  background-color: #000;
+}
+
+.black {
+  color: #000;
+  padding: 4px;
+}
+
+.yellow {
+  color: #ffbc03;
+  padding: 4px;
+  background-color: #fff;
+}
+
 /*Adaptive*/
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   body {
     padding-left: 0px;
   }
@@ -550,7 +701,6 @@ section {
     font-size: 18px;
   }
 
-
   .modal-input {
     font-size: 18px;
   }
@@ -559,7 +709,41 @@ section {
     font-size: 15px;
   }
 
-  #submit-button {
+  #submit-idea-button {
     font-size: 18px;
+  }
+
+  /*modal edit and order */
+  .save-button {
+    font-size: 18px;
+  }
+
+  /* modal order */
+  #basket-close-button {
+    font-size: 15px;
+  }
+
+  #basket-title {
+    font-size: 25px;
+  }
+
+  .order-gift-name {
+    font-size: 20px;
+  }
+
+  .order-input {
+    font-size: 20px;
+  }
+
+  .all-price-text {
+    font-size: 20px;
+  }
+
+  .all-price-text {
+    font-size: 22px;
+  }
+
+  .packaging-item {
+    font-size: 20px;
   }
 }

@@ -1,5 +1,7 @@
 let gifts = [];
 
+const userInSystem = localStorage.getItem("user") || "";
+
 const giftsList = document.querySelector(".gifts-list"); // сам список
 
 // Валідація імпута пошуку
@@ -126,7 +128,7 @@ fetch("./phpDatabase/shopDatabase.php")
         giftsArray.reverse(); // Сортування від дорогих до дешевих
       }
 
-      giftsList.innerHTML = ""
+      giftsList.innerHTML = "";
       giftsArray.forEach(function (item) {
         giftsList.appendChild(item);
       });
@@ -211,3 +213,61 @@ fetch("./phpDatabase/shopDatabase.php")
   .catch((error) => {
     console.error("There has been a problem with your fetch operation:", error);
   });
+
+// ----------------------------------------------- BASKET --------------------------------------------------------
+
+const basketLink = document.querySelector(".basket-link");
+
+const basketNumber = document.querySelector(".basket-number");
+
+function basketFetch() {
+  fetch("./phpDatabase/basketNumberDatabase.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({ user: userInSystem }).toString(),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("status code:" + response.status);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      basketNumber.textContent = data;
+    })
+    .catch((error) => {
+      console.error("error: ", error);
+    });
+}
+
+if (userInSystem > 0) {
+  basketLink.href = "./myAccount.html #basket";
+  basketFetch();
+} else {
+  basketLink.href = "#";
+  basketLink.addEventListener("click", () => {
+    ModalMessage("Для переходу в кошик авторизуйтеся, будь ласка!");
+  });
+}
+
+// Модальне вікно
+const messageModal = document.getElementById("message-modal");
+const messageCloseButton = document.getElementById("message-close-button");
+const messageTitle = document.getElementById("message-title");
+
+messageCloseButton.addEventListener("click", function () {
+  messageModal.style.display = "none";
+});
+
+function ModalMessage(title) {
+  setTimeout(function () {
+    messageTitle.textContent = title;
+    messageModal.style.display = "flex";
+  }, 0);
+
+  setTimeout(function () {
+    messageModal.style.display = "none";
+  }, 4000);
+}
