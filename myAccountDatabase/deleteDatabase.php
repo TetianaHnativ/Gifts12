@@ -12,13 +12,14 @@ if ($conn->connect_error) {
 
 $id = $_POST['id'];
 $name = $_POST['name'];
+$user = $_POST['user'];
 
 if ($name === "favourite gift") {
-    $sql = "DELETE FROM favourites WHERE gift_id = $id";
+    $sql = "DELETE FROM favourites WHERE gift_id = $id AND user = $user";
 } elseif ($name === "basket gift") {
-    $sql = "DELETE FROM basket WHERE gift_id = $id";
+    $sql = "DELETE FROM basket WHERE gift_id = $id AND user = $user";
 } elseif ($name === "favourite idea") {
-    $sql = "DELETE FROM favourites WHERE idea_id = $id";
+    $sql = "DELETE FROM favourites WHERE idea_id = $id AND user = $user";
 } elseif ($name === "my idea") {
     $sql1 = "DELETE FROM favourites WHERE idea_id = $id";
     $sql2 = "DELETE FROM ideas WHERE id = $id";

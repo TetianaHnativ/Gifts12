@@ -35,12 +35,16 @@ giftPrice.textContent = gift.price + " грн.";
 const giftBasket = document.querySelector(".gift-basket");
 const giftSelected = document.querySelector(".gift-selected");
 
-const basket = JSON.parse(localStorage.getItem('basket')) || [];;
-const favourites = JSON.parse(localStorage.getItem('favouritesGifts')) || [];;
+const basket = JSON.parse(localStorage.getItem("basket")) || [];
+const favourites = JSON.parse(localStorage.getItem("favouritesGifts")) || [];
 
 giftBasket.addEventListener("click", () => {
   if (user !== 0) {
-    addToListGift("basketDatabase.php", "Подарунок додано до кошика!", "кошика");
+    addToListGift(
+      "basketDatabase.php",
+      "Подарунок додано до кошика!",
+      "кошика"
+    );
   } else {
     ModalMessage("Авторизуйтеся, будь ласка!");
   }
@@ -48,7 +52,11 @@ giftBasket.addEventListener("click", () => {
 
 giftSelected.addEventListener("click", () => {
   if (user !== 0) {
-    addToListGift("favouritesGiftDatabase.php", "Подарунок додано до списку улюблених!", "списку улюблених");
+    addToListGift(
+      "favouritesGiftDatabase.php",
+      "Подарунок додано до списку улюблених!",
+      "списку улюблених"
+    );
   } else {
     ModalMessage("Авторизуйтеся, будь ласка!");
   }
@@ -109,7 +117,6 @@ messageCloseButton.addEventListener("click", function () {
   messageModal.style.display = "none";
 });
 
-
 function ModalMessage(title) {
   setTimeout(function () {
     messageTitle.textContent = title;
@@ -120,4 +127,3 @@ function ModalMessage(title) {
     messageModal.style.display = "none";
   }, 4000);
 }
-

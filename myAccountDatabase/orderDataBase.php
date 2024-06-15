@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
             }
         }
 
-        $sql3 = "DELETE FROM basket";
+        $sql3 = "DELETE FROM basket WHERE user = $user";
         $conn->query($sql3);
         echo json_encode("order successful");
     } else {

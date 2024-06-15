@@ -16,7 +16,7 @@ $sql = "SELECT favourites.id, favourites.name, favourites.idea_id, favourites.us
 users.username, users.surname
 FROM favourites
 LEFT JOIN ideas ON ideas.id = favourites.idea_id
-LEFT JOIN users ON users.id = favourites.user
+LEFT JOIN users ON users.id = ideas.user
 WHERE favourites.name = 'idea' AND favourites.user = '$user'";
 
 $result = $conn->query($sql);

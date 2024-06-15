@@ -65,7 +65,7 @@ async function saveUserData() {
     username: username.value,
     phone: phone.value,
     email: email.value,
-    password: password,
+    password: password.value,
   };
 
   // Відправлення даних на сервер

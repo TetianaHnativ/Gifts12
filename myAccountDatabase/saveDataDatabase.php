@@ -22,6 +22,16 @@ $result = $conn->query("SELECT id FROM users WHERE id = $user");
 $data_array = array();
 
 if ($result->num_rows > 0) {
+    $isEmailExist = $conn->query("SELECT * FROM users WHERE email = '$email' AND id <> $user");
+
+    if ($isEmailExist->num_rows > 0) {
+        $sqlEmail = $conn->query("SELECT email FROM users WHERE id = $user");
+        if ($sqlEmail->num_rows > 0) {
+            $row = $sqlEmail->fetch_assoc();
+            $email = $row['email'];
+        }
+    }
+
     $sql = "UPDATE users SET surname = '$surname', username = '$username',
     email = '$email', phone = '$phone' WHERE id = '$user'";
 
@@ -31,7 +41,9 @@ if ($result->num_rows > 0) {
         $conn->query($sql2);
     }
 
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sql) === TRUE && $isEmailExist->num_rows > 0) {
+        echo json_encode("success and email");
+    } else if ($conn->query($sql) === TRUE) {
         echo json_encode("success");
     } else {
         echo json_encode("Error: " . $sql . "<br>" . $conn->error);

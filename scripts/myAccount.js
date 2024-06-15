@@ -179,6 +179,7 @@ async function updateGiftsLists() {
             (await myAccountDataBase("deleteDatabase", {
               id: gift.id,
               name: "favourite gift",
+              user: userData.id,
             })) === "deletion successful"
           ) {
             deleteModal.style.display = "none";
@@ -277,6 +278,7 @@ async function updateGiftsLists() {
             (await myAccountDataBase("deleteDatabase", {
               id: gift.id,
               name: "basket gift",
+              user: userData.id,
             })) === "deletion successful"
           ) {
             deleteModal.style.display = "none";
@@ -387,6 +389,7 @@ async function updateGiftsLists() {
           (await myAccountDataBase("deleteDatabase", {
             id: gift.id,
             name: "basket gift",
+            user: userData.id,
           })) === "deletion successful"
         ) {
           basketModal.style.display = "none";
@@ -403,6 +406,8 @@ async function updateGiftsLists() {
     const addressModal = document.getElementById("address-modal");
     const modalPhone = document.getElementById("modal-phone");
     const modalAllPrice = document.getElementById("modal-all-price");
+
+    modalPhone.value = userData.phone;
 
     function radioButton() {
       const radioButtons = document.querySelectorAll(".packaging-ragio");
@@ -614,6 +619,16 @@ if (userData) {
         oldPassword.value = "";
         newPassword.value = "";
         passwordConfirmation.value = "";
+      } else {
+        ModalMessage(
+          "Ваші дані оновлено, КРІМ пошти, така вже є в системі, виберіть іншу, будь ласка!",
+          messageModal,
+          messageTitle
+        );
+        PasswordFields(true, "");
+        oldPassword.value = "";
+        newPassword.value = "";
+        passwordConfirmation.value = "";
       }
     }
   });
@@ -701,7 +716,7 @@ async function updateIdeasLists() {
         element.username
       }</p>
       <p class="idea-price my-idea-price">${
-        element.price ? element.price + " грн." : "Безкоштовно"
+        element.price > 0 ? element.price + " грн." : "Безкоштовно"
       } 
       </p>
     </div>
@@ -743,6 +758,7 @@ async function updateIdeasLists() {
             (await myAccountDataBase("deleteDatabase", {
               id: idea.id,
               name: "my idea",
+              user: userData.id,
             })) === "deletion successful"
           ) {
             deleteModal.style.display = "none";
@@ -769,17 +785,33 @@ async function updateIdeasLists() {
 
         //console.log(data);
 
-        ideaImageUrl.value = data[0].img;
+        if (data[0].img !== "./imgs/idea-img.jpg") {
+          ideaImageUrl.value = data[0].img;
+        }
         ideaName.value = data[0].name;
         ideaPrice.value = data[0].price;
         ideaPhone.value = data[0].phone;
         ideaDescription.value = data[0].description;
 
+        //---------------------------------------- add-data-price-phone-validation --------------------------------
+        const addIdeaPrice = document.getElementById("price");
+
+        addIdeaPrice.addEventListener("input", () => {
+          if (parseFloat(addIdeaPrice.value) > 0) {
+            document.getElementById("idea-phone").required = true;
+          } else {
+            document.getElementById("idea-phone").required = false;
+          }
+        });
+
         ideaForm.addEventListener("submit", async function (e) {
           e.preventDefault();
           newIdea = {
             id: idea.id,
-            img: ideaImageUrl.value,
+            img:
+              ideaImageUrl.value > ""
+                ? ideaImageUrl.value
+                : "./imgs/idea-img.jpg",
             name: ideaName.value,
             user: userData.id,
             price: ideaPrice.value,
@@ -821,7 +853,7 @@ async function updateIdeasLists() {
         element.username
       }</p>
       <p class="idea-price favourites-idea-price">${
-        element.price ? element.price + " грн." : "Безкоштовно"
+        element.price > 0 ? element.price + " грн." : "Безкоштовно"
       } 
       </p>
     </div>
@@ -871,6 +903,7 @@ async function updateIdeasLists() {
             (await myAccountDataBase("deleteDatabase", {
               id: idea.id,
               name: "favourite idea",
+              user: userData.id,
             })) === "deletion successful"
           ) {
             deleteModal.style.display = "none";

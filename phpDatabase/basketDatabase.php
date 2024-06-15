@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $gift = $_POST['gift'];
 $user = $_POST['user'];
 
-$idGiftExists = $conn->query("SELECT gift_id FROM basket WHERE gift_id = $gift");
+$idGiftExists = $conn->query("SELECT gift_id FROM basket WHERE gift_id = $gift AND user = $user");
 
 
 if ($idGiftExists->num_rows > 0) {

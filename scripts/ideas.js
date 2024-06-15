@@ -46,7 +46,7 @@ fetch("./phpDatabase/ideasDatabase.php")
   <h3 class="idea-name">${element.name}</h3>
   <p class="idea-author">${element.surname} ${element.username}</p>
   <p class="idea-price">${
-    element.price ? element.price + " грн." : "Безкоштовно"
+    element.price > 0 ? element.price + " грн." : "Безкоштовно"
   } </p></a>`;
       ideasList.append(li);
     });
@@ -176,6 +176,16 @@ let price = 0;
 let phone = "";
 let description = "";
 
+const addIdeaPrice = document.getElementById("price");
+
+addIdeaPrice.addEventListener("input", () => {
+  if (parseFloat(addIdeaPrice.value) > 0) {
+    document.getElementById("phone").required = true;
+  } else {
+    document.getElementById("phone").required = false;
+  }
+});
+
 ideaForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -186,7 +196,7 @@ ideaForm.addEventListener("submit", (e) => {
   description = document.getElementById("description").value;
 
   newIdea = {
-    img: picture || "./imgs/idea-img.jpg",
+    img: picture > "" ? picture : "./imgs/idea-img.jpg",
     name: name,
     author: user,
     price: parseFloat(price) || 0,

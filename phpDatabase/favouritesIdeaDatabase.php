@@ -14,7 +14,7 @@ $name = $_POST['name'];
 $idea = $_POST['idea'];
 $user = $_POST['user'];
 
-$idIdeaExists = $conn->query("SELECT idea_id FROM favourites WHERE idea_id = $idea");
+$idIdeaExists = $conn->query("SELECT idea_id FROM favourites WHERE idea_id = $idea AND user = $user");
 
 
 if ($idIdeaExists->num_rows > 0) {
