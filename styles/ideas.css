@@ -97,10 +97,15 @@ main {
     border: 1px solid #038cff;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+
+    justify-content: space-between;
+
+    gap: 10px;
     padding-bottom: 8px;
     max-width: 300px;
     border-radius: 10px;
+
+    height: 400px;
 }
 
 .idea-img {

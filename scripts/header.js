@@ -5,7 +5,7 @@ let myUser = 0;
 myUser = parseInt(localStorage.getItem("user")) || 0;
 
 if (myUser) {
-    loginLink.textContent = "Profile";
+    loginLink.textContent = "Кабінет";
     loginLink.href = "myAccount.html";
 } else {
     loginLink.textContent = "Login";
