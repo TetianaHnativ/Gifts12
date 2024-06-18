@@ -38,15 +38,15 @@ if ($result->num_rows > 0) {
             $price = floatval($data['price']);
 
             $sql2 = "INSERT INTO orders_gifts (order_id, gift, number, price) VALUES ($last_id, $gift, $number, $price)";
-
-            if ($conn->query($sql2) !== TRUE) {
+            $sql3 = "UPDATE gifts SET number = number - $number WHERE id = $gift";
+            if ($conn->query($sql2) !== TRUE || $conn->query($sql3) !== TRUE) {
                 echo json_encode("Error inserting gift data: " . $conn->error);
                 break;
             }
         }
 
-        $sql3 = "DELETE FROM basket WHERE user = $user";
-        $conn->query($sql3);
+        $sql4 = "DELETE FROM basket WHERE user = $user";
+        $conn->query($sql4);
         echo json_encode("order successful");
     } else {
         echo json_encode("Error inserting order: " . $conn->error);
